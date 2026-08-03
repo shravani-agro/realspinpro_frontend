@@ -44,7 +44,7 @@ export default function WalletPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="p-6 rounded-xl glass-panel border-t border-neon-emerald/50">
-          <p className="text-sm text-gray-400 mb-1">Gateway Liquidity (Cashfree)</p>
+          <p className="text-sm text-gray-400 mb-1">Gateway Liquidity (PayfromUPI)</p>
           <h3 className="text-3xl font-black text-white">{gatewayBalance}</h3>
         </div>
         <div className="p-6 rounded-xl glass-panel border-t border-neon-blue/50">

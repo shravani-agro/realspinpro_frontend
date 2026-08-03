@@ -191,7 +191,7 @@ export default function TransactionsPage() {
                               disabled={processingId === tx.id}
                               onClick={() => handleUpdateStatus(tx.id, "success")}
                               className="p-2 bg-neon-emerald/10 hover:bg-neon-emerald/20 text-neon-emerald rounded-lg transition-colors border border-neon-emerald/20 disabled:opacity-50"
-                              title="Approve & Send via Cashfree"
+                              title="Approve & Send via PayfromUPI"
                             >
                               {processingId === tx.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
                             </button>
@@ -206,7 +206,7 @@ export default function TransactionsPage() {
                           </div>
                         ) : (
                           <div className="flex justify-end gap-2">
-                            <span className="text-xs text-gray-500 italic mr-2">Auto-verifying via Cashfree</span>
+                            <span className="text-xs text-gray-500 italic mr-2">Auto-verifying via PayfromUPI</span>
                             <button 
                               disabled={processingId === tx.id}
                               onClick={() => handleUpdateStatus(tx.id, "failed")}
