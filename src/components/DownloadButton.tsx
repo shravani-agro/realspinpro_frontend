@@ -4,7 +4,7 @@ import { Download } from "lucide-react";
 import { motion } from "framer-motion";
 
 const DOWNLOAD_URL =
-  "https://github.com/harryongit/game_app/releases/latest/download/realspinpro.apk";
+  "https://github.com/shravani-agro/realspinpro_frontend/releases/latest/download/realspinpro.apk";
 
 type Props = {
   className?: string;
