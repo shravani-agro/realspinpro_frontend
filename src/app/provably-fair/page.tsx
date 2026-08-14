@@ -1,6 +1,63 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Provably Fair | RealSpinPro",
+  description:
+    "Learn how RealSpinPro ensures provably fair outcomes using cryptographic SHA-256 server seeds, client seeds, and nonce-based verification for every game round.",
+  keywords: [
+    "provably fair",
+    "cryptographic verification",
+    "SHA-256",
+    "server seed",
+    "client seed",
+    "fair play",
+    "transparent gaming",
+    "RealSpinPro",
+  ],
+  alternates: { canonical: "https://realspinpro.com/provably-fair" },
+  openGraph: {
+    title: "Provably Fair | RealSpinPro",
+    description:
+      "Learn how RealSpinPro ensures provably fair outcomes using cryptographic SHA-256 server seeds, client seeds, and nonce-based verification for every game round.",
+    url: "https://realspinpro.com/provably-fair",
+    images: ["/logo.png"],
+  },
+  twitter: {
+    title: "Provably Fair | RealSpinPro",
+    description:
+      "Learn how RealSpinPro ensures provably fair outcomes using cryptographic verification for every game round.",
+    images: ["/logo.png"],
+  },
+};
+
 export default function ProvablyFair() {
   return (
     <main className="min-h-screen pt-32 pb-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://realspinpro.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Provably Fair", "item": "https://realspinpro.com/provably-fair" }
+            ]
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Provably Fair | RealSpinPro",
+            "url": "https://realspinpro.com/provably-fair",
+            "description": "Learn how RealSpinPro ensures provably fair outcomes using cryptographic SHA-256 server seeds, client seeds, and nonce-based verification for every game round."
+          }),
+        }}
+      />
       <div className="glass-panel rounded-3xl p-8 md:p-12">
         <h1 className="text-4xl md:text-5xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-neon-blue to-neon-purple">
           Provably Fair

@@ -31,7 +31,7 @@ export function DownloadButton({
       whileTap={{ scale: 0.96 }}
       className={`${base} inline-flex items-center justify-center gap-2 cursor-pointer ${padding} ${className}`}
     >
-      <Download className="w-5 h-5" />
+      <Download className="w-5 h-5" aria-hidden="true" />
       <span>{label}</span>
     </motion.a>
   );

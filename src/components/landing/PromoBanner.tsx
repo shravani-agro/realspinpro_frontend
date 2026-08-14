@@ -12,7 +12,7 @@ export function PromoBanner() {
       <div className="absolute inset-0 z-0">
         <Image
           src="/5.png"
-          alt="RealSpinPro"
+          alt="RealSpinPro players winning big — download and play"
           fill
           sizes="100vw"
           className="object-cover"

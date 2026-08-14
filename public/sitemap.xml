@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <url>
+    <loc>https://realspinpro.com/</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://realspinpro.com/logo.png</image:loc>
+      <image:title>RealSpinPro Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://realspinpro.com/2.png</image:loc>
+      <image:title>RealSpinPro Hero Banner</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://realspinpro.com/boommine</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://realspinpro.com/boommine.png</image:loc>
+      <image:title>BoomMine Game Screen</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://realspinpro.com/provably-fair</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://realspinpro.com/logo.png</image:loc>
+      <image:title>RealSpinPro Provably Fair</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://realspinpro.com/terms</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://realspinpro.com/privacy</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>
