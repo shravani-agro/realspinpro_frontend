@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy | RealSpinPro",
   description:
-    "Read RealSpinPro's Privacy Policy to understand how we collect, use, and protect your personal data when you play our provably fair casino games.",
+    "Read RealSpinPro's Privacy Policy to understand how we collect, use, and protect your personal data when you play our provably fair Entertainment Games.",
   keywords: [
     "privacy policy",
     "data protection",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Privacy Policy | RealSpinPro",
     description:
-      "Read RealSpinPro's Privacy Policy to understand how we collect, use, and protect your personal data when you play our provably fair casino games.",
+      "Read RealSpinPro's Privacy Policy to understand how we collect, use, and protect your personal data when you play our provably fair Entertainment Games.",
     url: "https://realspinpro.com/privacy",
     images: ["/logo.png"],
   },
@@ -53,7 +53,7 @@ export default function PrivacyPolicy() {
             "@type": "WebPage",
             "name": "Privacy Policy | RealSpinPro",
             "url": "https://realspinpro.com/privacy",
-            "description": "Read RealSpinPro's Privacy Policy to understand how we collect, use, and protect your personal data when you play our provably fair casino games."
+            "description": "Read RealSpinPro's Privacy Policy to understand how we collect, use, and protect your personal data when you play our provably fair Entertainment Games."
           }),
         }}
       />

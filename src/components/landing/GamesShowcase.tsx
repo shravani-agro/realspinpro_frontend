@@ -17,9 +17,9 @@ const GAMES = [
   },
   {
     id: 2,
-    name: "Pro Spin",
+    name: "Pro Challenge",
     image: "/prospin.png",
-    description: "The ultimate royal spinning arena for true premium high rollers.",
+    description: "The ultimate royal arena for true premium players.",
     color: "from-purple-400 to-indigo-600",
     glow: "rgba(176, 38, 255, 0.4)",
     tag: "Popular",
@@ -27,9 +27,9 @@ const GAMES = [
   },
   {
     id: 3,
-    name: "Spin Wheel",
+    name: "Wheel Challenge",
     image: "/spin.png",
-    description: "Spin the luxurious lucky gold wheel to win daily jackpots.",
+    description: "Take on the luxurious lucky gold wheel to win daily jackpots.",
     color: "from-pink-400 to-rose-600",
     glow: "rgba(255, 0, 127, 0.4)",
     tag: "Hot Reward",
@@ -51,15 +51,15 @@ export function GamesShowcase() {
   return (
     <section className="py-24 md:py-32 relative overflow-hidden">
       {/* Colorful background lighting */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-casino-purple/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-casino-red/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-gaming-purple/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-gaming-red/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
 
         {/* Section Title */}
         <div className="text-center mb-16 md:mb-20">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border border-casino-gold/30 bg-casino-gold/5 text-casino-gold text-xs font-bold tracking-widest uppercase">
-            <Trophy className="w-4 h-4 text-casino-gold" />
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border border-gaming-gold/30 bg-gaming-gold/5 text-gaming-gold text-xs font-bold tracking-widest uppercase">
+            <Trophy className="w-4 h-4 text-gaming-gold" />
             <span>4 Exhilarating Arenas</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black mb-4 text-white">
@@ -85,13 +85,13 @@ export function GamesShowcase() {
               <div
                 className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl -z-10"
                 style={{
-                  background: `linear-gradient(135deg, var(--color-casino-gold), ${game.glow})`,
+                  background: `linear-gradient(135deg, var(--color-gaming-gold), ${game.glow})`,
                   transform: "scale(0.95)"
                 }}
               />
 
               {/* Game Card Container */}
-              <div className="luxury-glass rounded-3xl p-6 h-full flex flex-col items-center text-center relative overflow-hidden border border-white/10 group-hover:border-casino-gold/50 transition-all duration-500 group-hover:-translate-y-2.5">
+              <div className="luxury-glass rounded-3xl p-6 h-full flex flex-col items-center text-center relative overflow-hidden border border-white/10 group-hover:border-gaming-gold/50 transition-all duration-500 group-hover:-translate-y-2.5">
 
                 {/* Colored Spotlight Inside Card */}
                 <div
@@ -120,7 +120,7 @@ export function GamesShowcase() {
                 </motion.div>
 
                 {/* Name & Description */}
-                <h3 className="text-2xl font-black text-white mb-2 font-orbitron tracking-wide group-hover:text-casino-gold transition-colors">
+                <h3 className="text-2xl font-black text-white mb-2 font-orbitron tracking-wide group-hover:text-gaming-gold transition-colors">
                   {game.name}
                 </h3>
                 <p className="text-sm text-indigo-200/60 mb-6 flex-grow leading-relaxed">

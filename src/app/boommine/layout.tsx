@@ -4,30 +4,28 @@ import { Toaster } from "sonner";
 export const metadata: Metadata = {
   title: "BoomMine | Minefield Multiplier Game | RealSpinPro",
   description:
-    "Play BoomMine at RealSpinPro. Pick gems, avoid mines, and multiply your winnings. Cash out before hitting a bomb for instant real-money payouts. Provably fair.",
+    "Play BoomMine at RealSpinPro. Pick gems, avoid mines, and multiply your winnings. Cash out before hitting a bomb for instant payouts. Provably fair.",
   keywords: [
     "BoomMine",
     "mines game",
     "minefield",
     "multiplier game",
-    "casino",
+    "gaming",
     "provably fair",
-    "real money",
     "instant payouts",
-    "gamble",
   ],
   alternates: { canonical: "https://realspinpro.com/boommine" },
   openGraph: {
     title: "BoomMine | Minefield Multiplier Game | RealSpinPro",
     description:
-      "Play BoomMine at RealSpinPro. Pick gems, avoid mines, and multiply your winnings. Cash out before hitting a bomb for instant real-money payouts. Provably fair.",
+      "Play BoomMine at RealSpinPro. Pick gems, avoid mines, and multiply your winnings. Cash out before hitting a bomb for instant payouts. Provably fair.",
     url: "https://realspinpro.com/boommine",
     images: ["/boommine.png"],
   },
   twitter: {
     title: "BoomMine | Minefield Multiplier Game | RealSpinPro",
     description:
-      "Play BoomMine at RealSpinPro. Pick gems, avoid mines, and multiply your winnings. Cash out before hitting a bomb for instant real-money payouts.",
+      "Play BoomMine at RealSpinPro. Pick gems, avoid mines, and multiply your winnings. Cash out before hitting a bomb for instant payouts.",
     images: ["/boommine.png"],
   },
 };
@@ -43,8 +41,8 @@ export default function BoomMineLayout({ children }: { children: React.ReactNode
             "@type": "Game",
             "name": "BoomMine",
             "url": "https://realspinpro.com/boommine",
-            "description": "Pick gems, avoid mines, and multiply your winnings. Cash out before hitting a bomb for instant real-money payouts.",
-            "genre": ["Casino", "Minesweeper", "Gambling"],
+            "description": "Pick gems, avoid mines, and multiply your winnings. Cash out before hitting a bomb for instant payouts.",
+            "genre": ["Gaming", "Minesweeper", "Gaming"],
             "offers": {
               "@type": "Offer",
               "price": "0",

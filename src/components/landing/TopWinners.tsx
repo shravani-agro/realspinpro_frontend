@@ -6,9 +6,9 @@ import { DownloadButton } from "@/components/DownloadButton";
 
 const WINNERS = [
   { rank: 1, user: "Rahul K.", game: "Boommine", multiplier: "1,250x", payout: "₹1,25,000", color: "#ffd700", glow: "rgba(255, 215, 0, 0.4)" },
-  { rank: 2, user: "Vikram S.", game: "Pro Spin", multiplier: "850x", payout: "₹85,000", color: "#e2e8f0", glow: "rgba(255, 255, 255, 0.3)" },
+  { rank: 2, user: "Vikram S.", game: "Pro Challenge", multiplier: "850x", payout: "₹85,000", color: "#e2e8f0", glow: "rgba(255, 255, 255, 0.3)" },
   { rank: 3, user: "Pooja M.", game: "Toss Toss", multiplier: "500x", payout: "₹50,000", color: "#cd7f32", glow: "rgba(205, 127, 50, 0.3)" },
-  { rank: 4, user: "Amit D.", game: "Spin Wheel", multiplier: "250x", payout: "₹25,000", color: "#ff007f", glow: "rgba(255, 0, 127, 0.2)" },
+  { rank: 4, user: "Amit D.", game: "Wheel Challenge", multiplier: "250x", payout: "₹25,000", color: "#ff007f", glow: "rgba(255, 0, 127, 0.2)" },
   { rank: 5, user: "Suresh P.", game: "Boommine", multiplier: "100x", payout: "₹10,000", color: "#00f3ff", glow: "rgba(0, 243, 255, 0.2)" },
 ];
 
@@ -25,9 +25,9 @@ export function TopWinners() {
         
         {/* Title */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center gap-2 mb-4 px-4 py-2 rounded-full bg-casino-gold/5 border border-casino-gold/30">
-            <Trophy className="w-5 h-5 text-casino-gold animate-bounce" />
-            <span className="text-xs font-bold tracking-widest text-casino-gold uppercase font-orbitron">Hall of Fame</span>
+          <div className="inline-flex items-center justify-center gap-2 mb-4 px-4 py-2 rounded-full bg-gaming-gold/5 border border-gaming-gold/30">
+            <Trophy className="w-5 h-5 text-gaming-gold animate-bounce" />
+            <span className="text-xs font-bold tracking-widest text-gaming-gold uppercase font-orbitron">Hall of Fame</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black mb-4 text-white">
             RECENT HUGE <span className="neon-text-gold">PAYOUTS</span>
@@ -36,10 +36,10 @@ export function TopWinners() {
         </div>
 
         {/* Leaderboard Panel */}
-        <div className="luxury-glass-gold rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(255,215,0,0.06)] border border-casino-gold/30">
+        <div className="luxury-glass-gold rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(255,215,0,0.06)] border border-gaming-gold/30">
           
           {/* Header Bar */}
-          <div className="px-6 py-4 bg-[#19103b]/90 border-b border-casino-gold/20 flex justify-between items-center">
+          <div className="px-6 py-4 bg-[#19103b]/90 border-b border-gaming-gold/20 flex justify-between items-center">
             <div className="flex items-center gap-2">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -104,7 +104,7 @@ export function TopWinners() {
                           {winner.user.substring(0, 2).toUpperCase()}
                         </div>
                       </div>
-                      <span className="group-hover:text-casino-gold transition-colors font-bold">{winner.user}</span>
+                      <span className="group-hover:text-gaming-gold transition-colors font-bold">{winner.user}</span>
                     </td>
 
                     {/* Game */}

@@ -35,14 +35,14 @@ export function PromoBanner() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.15, duration: 0.7, type: "spring" }}
-            className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-casino-gold/40 bg-white/5 backdrop-blur-sm text-casino-gold text-xs md:text-sm font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(255,215,0,0.15)]"
+            className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-gaming-gold/40 bg-white/5 backdrop-blur-sm text-gaming-gold text-xs md:text-sm font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(255,215,0,0.15)]"
           >
-            <Sparkles className="w-4 h-4 text-casino-gold animate-pulse" />
+            <Sparkles className="w-4 h-4 text-gaming-gold animate-pulse" />
             <span>Your Winning Streak Starts Now</span>
           </motion.div>
 
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] text-white drop-shadow-[0_4px_15px_rgba(0,0,0,0.7)]">
-            SPIN SMART. <span className="neon-text-gold">WIN BIG.</span>
+            PLAY SMART. <span className="neon-text-gold">WIN BIG.</span>
           </h2>
 
           <p className="text-sm sm:text-base md:text-lg text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">

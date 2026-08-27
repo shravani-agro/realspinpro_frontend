@@ -42,10 +42,10 @@
   --color-neon-magenta: #ff00ff;
   --color-neon-emerald: #00ff66;
   --color-neon-pink: #ff007f;
-  --color-casino-gold: #ffd700;
-  --color-casino-red: #e6003a;
-  --color-casino-purple: #7900d6;
-  --color-casino-navy: #0b0726;
+  --color-gaming-gold: #ffd700;
+  --color-gaming-red: #e6003a;
+  --color-gaming-purple: #7900d6;
+  --color-gaming-navy: #0b0726;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -209,13 +209,13 @@
   }
 }
 
-/* Premium Casino Styling */
+/* Premium Gaming Styling */
 .luxury-glass {
-  @apply bg-[#150d32]/65 backdrop-blur-xl border border-casino-gold/30 shadow-[0_8px_32px_rgba(121,0,214,0.25)];
+  @apply bg-[#150d32]/65 backdrop-blur-xl border border-gaming-gold/30 shadow-[0_8px_32px_rgba(121,0,214,0.25)];
 }
 
 .luxury-glass-gold {
-  @apply bg-gradient-to-b from-[#25184f]/80 to-[#120b2e]/90 backdrop-blur-xl border border-casino-gold/45 shadow-[0_15px_35px_rgba(255,215,0,0.15)];
+  @apply bg-gradient-to-b from-[#25184f]/80 to-[#120b2e]/90 backdrop-blur-xl border border-gaming-gold/45 shadow-[0_15px_35px_rgba(255,215,0,0.15)];
 }
 
 .glass {
@@ -223,7 +223,7 @@
 }
 
 .glass-panel {
-  @apply bg-[#120b2e]/75 backdrop-blur-xl border border-casino-gold/25 shadow-[0_0_20px_rgba(255,215,0,0.08)];
+  @apply bg-[#120b2e]/75 backdrop-blur-xl border border-gaming-gold/25 shadow-[0_0_20px_rgba(255,215,0,0.08)];
 }
 
 .neon-text {
@@ -231,7 +231,7 @@
 }
 
 .neon-text-gold {
-  @apply text-transparent bg-clip-text bg-gradient-to-r from-casino-gold via-amber-200 to-yellow-500;
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-gaming-gold via-amber-200 to-yellow-500;
 }
 
 .neon-text-pink {
@@ -246,11 +246,11 @@
 }
 
 .gold-button {
-  @apply relative overflow-hidden font-bold tracking-wider uppercase text-slate-950 bg-gradient-to-r from-yellow-400 via-casino-gold to-amber-500 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(255,215,0,0.4)] hover:shadow-[0_0_25px_rgba(255,215,0,0.7)] hover:scale-[1.03] active:scale-[0.98];
+  @apply relative overflow-hidden font-bold tracking-wider uppercase text-slate-950 bg-gradient-to-r from-yellow-400 via-gaming-gold to-amber-500 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(255,215,0,0.4)] hover:shadow-[0_0_25px_rgba(255,215,0,0.7)] hover:scale-[1.03] active:scale-[0.98];
 }
 
 .purple-button {
-  @apply relative overflow-hidden font-bold tracking-wider uppercase text-white bg-gradient-to-r from-neon-purple via-casino-purple to-indigo-700 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(176,38,255,0.4)] hover:shadow-[0_0_25px_rgba(176,38,255,0.7)] hover:scale-[1.03] active:scale-[0.98];
+  @apply relative overflow-hidden font-bold tracking-wider uppercase text-white bg-gradient-to-r from-neon-purple via-gaming-purple to-indigo-700 rounded-xl transition-all duration-300 shadow-[0_0_15px_rgba(176,38,255,0.4)] hover:shadow-[0_0_25px_rgba(176,38,255,0.7)] hover:scale-[1.03] active:scale-[0.98];
 }
 
 .neon-border {
@@ -259,7 +259,7 @@
     linear-gradient(to right, var(--color-neon-blue), var(--color-neon-purple)) border-box;
 }
 
-/* Custom Scrollbar for Casino Cyberpunk feel */
+/* Custom Scrollbar for Gaming Cyberpunk feel */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -276,5 +276,5 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-casino-gold);
+  background: var(--color-gaming-gold);
 }

@@ -36,22 +36,22 @@ function AnimatedCounter({ end, prefix = "", suffix = "", duration = 2 }: { end:
 
 export function Stats() {
   return (
-    <section className="py-24 relative overflow-hidden bg-[#0c0822]/60 border-y border-casino-gold/15">
+    <section className="py-24 relative overflow-hidden bg-[#0c0822]/60 border-y border-gaming-gold/15">
       {/* Background glow highlights */}
-      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-casino-gold/40 to-transparent" />
+      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-gaming-gold/40 to-transparent" />
       <div className="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-neon-pink/40 to-transparent" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-24 bg-casino-purple/20 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-24 bg-gaming-purple/20 rounded-full blur-[80px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 text-center">
           
           {/* Stat 1 */}
           <div className="relative group p-4 cursor-default">
-            <div className="text-4xl md:text-5xl lg:text-6xl font-black text-white font-orbitron drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] mb-3 group-hover:text-casino-gold transition-colors">
+            <div className="text-4xl md:text-5xl lg:text-6xl font-black text-white font-orbitron drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] mb-3 group-hover:text-gaming-gold transition-colors">
               <AnimatedCounter end={150} suffix="M+" />
             </div>
-            <div className="text-xs font-black text-casino-gold uppercase tracking-widest font-sans">Spins Completed</div>
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-casino-gold/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="text-xs font-black text-gaming-gold uppercase tracking-widest font-sans">Rounds Completed</div>
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-gaming-gold/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
 
           {/* Stat 2 */}

@@ -58,22 +58,21 @@ export function Hero() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-xl text-left">
           {/* Elegant Badge */}
-          <div className="hero-badge inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-casino-gold/40 bg-white/5 backdrop-blur-sm text-casino-gold text-xs md:text-sm font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(255,215,0,0.15)]">
-            <Sparkles className="w-4 h-4 text-casino-gold animate-pulse" />
-            <span>Premium Anime Casino Floor</span>
+          <div className="hero-badge inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-gaming-gold/40 bg-white/5 backdrop-blur-sm text-gaming-gold text-xs md:text-sm font-bold tracking-widest uppercase shadow-[0_0_15px_rgba(255,215,0,0.15)]">
+            <Sparkles className="w-4 h-4 text-gaming-gold animate-pulse" />
+            <span>Premium Anime gaming floor</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] text-white drop-shadow-[0_4px_15px_rgba(0,0,0,0.7)]">
-            <span className="hero-word inline-block">SPIN</span>{" "}
             <span className="hero-word inline-block">THE</span>{" "}
             <span className="hero-word inline-block">ROYAL</span>{" "}
             <span className="hero-word neon-text-gold inline-block">GOLD</span>{" "}
             <span className="hero-word neon-text-gold inline-block">WHEEL</span>{" "}
-            <span className="hero-word text-2xl sm:text-3xl lg:text-4xl block sm:inline font-medium">&amp; WIN BIG</span>
+            <span className="hero-word text-2xl sm:text-3xl lg:text-4xl block sm:inline font-medium">CHALLENGE &amp; WIN</span>
           </h1>
 
           <p className="hero-desc text-sm sm:text-base md:text-lg text-white/90 mb-8 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
-            Step into a high-stakes, anime-infused gaming wonderland. Experience four custom-crafted games with instant payouts, transparent fair-play, and legendary daily jackpots!
+            Step into a high-energy, anime-infused gaming wonderland. Experience four custom-crafted games with instant payouts, transparent fair-play, and legendary daily jackpots!
           </p>
 
           <div className="hero-cta flex flex-col sm:flex-row items-start sm:items-center gap-4">

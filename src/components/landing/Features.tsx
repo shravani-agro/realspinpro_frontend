@@ -9,7 +9,7 @@ import { Zap, Wallet, Activity, Star, Award, ShieldCheck, Flame } from "lucide-r
 const PREVIEWS = [
   { src: "/3.png", label: "Instant Payouts", desc: "Withdraw winnings instantly to your account.", color: "#00f3ff", icon: Zap },
   { src: "/1.png", label: "1000x Multipliers", desc: "Watch rewards multiply in real-time, legendary returns.", color: "#ff007f", icon: Activity },
-  { src: "/4.png", label: "24/7 Live Draws", desc: "Non-stop casino floor action, real-time rooms.", color: "#e6003a", icon: Flame },
+  { src: "/4.png", label: "24/7 Live Draws", desc: "Non-stop gaming floor action, real-time rooms.", color: "#e6003a", icon: Flame },
 ];
 
 const container = {

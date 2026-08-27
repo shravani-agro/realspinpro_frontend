@@ -3,6 +3,7 @@ import { SceneWrapper } from "@/components/canvas/SceneWrapper";
 import { Hero } from "@/components/landing/Hero";
 import { GamesShowcase } from "@/components/landing/GamesShowcase";
 import { Features } from "@/components/landing/Features";
+import { HowItWorks } from "@/components/landing/HowItWorks";
 import { TopWinners } from "@/components/landing/TopWinners";
 import { Timeline } from "@/components/landing/Timeline";
 import { Testimonials } from "@/components/landing/Testimonials";
@@ -12,16 +13,16 @@ import { Footer } from "@/components/landing/Footer";
 import { Reveal } from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Premium Spin & Win | RealSpinPro",
+  title: "Premium Gaming | RealSpinPro",
   description:
-    "Play 4 premium casino games at RealSpinPro — Spin Wheel, BoomMine, Pro Spin & Toss Toss. Daily jackpots, instant payouts, provably fair, 18+ only.",
+    "Play 4 premium Entertainment Games at RealSpinPro — Wheel Challenge, BoomMine, Pro Challenge & Toss Toss. Daily jackpots, instant payouts, provably fair, 18+ only.",
   keywords: [
-    "spin wheel",
+    "wheel challenge",
     "BoomMine",
     "mines game",
-    "Pro Spin",
+    "Pro Challenge",
     "Toss Toss",
-    "casino games",
+    "Entertainment Games",
     "provably fair",
     "instant payouts",
     "daily jackpots",
@@ -29,16 +30,16 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://realspinpro.com/" },
   openGraph: {
-    title: "Premium Spin & Win | RealSpinPro",
+    title: "Premium Gaming | RealSpinPro",
     description:
-      "Play 4 premium casino games at RealSpinPro — Spin Wheel, BoomMine, Pro Spin & Toss Toss. Daily jackpots, instant payouts, provably fair, 18+ only.",
+      "Play 4 premium Entertainment Games at RealSpinPro — Wheel Challenge, BoomMine, Pro Challenge & Toss Toss. Daily jackpots, instant payouts, provably fair, 18+ only.",
     url: "https://realspinpro.com/",
     images: ["/logo.png"],
   },
   twitter: {
-    title: "Premium Spin & Win | RealSpinPro",
+    title: "Premium Gaming | RealSpinPro",
     description:
-      "Play 4 premium casino games at RealSpinPro — Spin Wheel, BoomMine, Pro Spin & Toss Toss. Daily jackpots, instant payouts, provably fair, 18+ only.",
+      "Play 4 premium Entertainment Games at RealSpinPro — Wheel Challenge, BoomMine, Pro Challenge & Toss Toss. Daily jackpots, instant payouts, provably fair, 18+ only.",
     images: ["/logo.png"],
   },
 };
@@ -54,8 +55,8 @@ export default function Home() {
             "@type": "WebSite",
             "name": "RealSpinPro",
             "url": "https://realspinpro.com",
-            "description": "Premium spin & win gaming platform with 4 casino games, provably fair algorithms, and instant payouts.",
-            "keywords": "spin wheel, casino, mines game, provably fair, real money games, instant payouts",
+            "description": "Premium gaming platform with 4 Entertainment Games, provably fair algorithms, and instant payouts.",
+            "keywords": "wheel challenge, gaming, mines game, provably fair, entertainment games, instant payouts",
             "publisher": {
               "@type": "Organization",
               "name": "RealSpinPro",
@@ -73,11 +74,11 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Game",
-            "name": "RealSpinPro - Premium Casino Games",
+            "name": "RealSpinPro - Premium Entertainment Games",
             "url": "https://realspinpro.com",
-            "description": "Play 4 premium games: Spin Wheel, BoomMine, Pro Spin, and Toss Toss with provably fair algorithms and instant payouts.",
-            "genre": ["Casino", "Gambling", "Minesweeper"],
-            "gameItem": ["Spin Wheel", "BoomMine", "Pro Spin", "Toss Toss"],
+            "description": "Play 4 premium games: Wheel Challenge, BoomMine, Pro Challenge, and Toss Toss with provably fair algorithms and instant payouts.",
+            "genre": ["Gaming", "Gaming", "Minesweeper"],
+            "gameItem": ["Wheel Challenge", "BoomMine", "Pro Challenge", "Toss Toss"],
             "offers": {
               "@type": "Offer",
               "price": "0",
@@ -99,7 +100,7 @@ export default function Home() {
                 "name": "What is RealSpinPro?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "RealSpinPro is a premium online gaming platform offering 4 casino games — Spin Wheel, BoomMine, Pro Spin, and Toss Toss — with provably fair algorithms and instant payouts."
+                  "text": "RealSpinPro is a premium online gaming platform offering 4 Entertainment Games — Wheel Challenge, BoomMine, Pro Challenge, and Toss Toss — with provably fair algorithms and instant payouts."
                 }
               },
               {
@@ -131,7 +132,7 @@ export default function Home() {
                 "name": "What is the minimum age to play?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Players must be 18 years or older to register and play on RealSpinPro. Responsible gambling practices are enforced."
+                  "text": "Players must be 18 years or older to register and play on RealSpinPro. Responsible gaming practices are enforced."
                 }
               }
             ]
@@ -161,6 +162,9 @@ export default function Home() {
       <GamesShowcase />
       <Reveal variant="up">
         <Features />
+      </Reveal>
+      <Reveal variant="up">
+        <HowItWorks />
       </Reveal>
       <Reveal variant="up">
         <TopWinners />

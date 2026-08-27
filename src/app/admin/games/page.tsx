@@ -158,17 +158,17 @@ export default function GameOperationsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* ========================================================= */}
-        {/* ==================== SPIN WHEEL ========================= */}
+        {/* ==================== wheel challenge ========================= */}
         {/* ========================================================= */}
         <div className="space-y-6">
           <div className="glass-panel rounded-2xl border border-amber-500/20 overflow-hidden">
             <div className="p-5 border-b border-white/5 bg-gradient-to-r from-amber-500/10 to-transparent">
               <h2 className="text-xl font-bold text-amber-500 flex items-center gap-2 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">
-                <Target className="w-5 h-5" /> Spin Wheel Control
+                <Target className="w-5 h-5" /> Wheel Challenge Control
               </h2>
             </div>
             
-            {/* Spin Wheel Stats */}
+            {/* Wheel Challenge Stats */}
             <div className="p-5 grid grid-cols-3 gap-4 border-b border-white/5 bg-black/20">
               <div>
                 <p className="text-xs text-gray-500 mb-1">Total Wagered</p>
@@ -186,7 +186,7 @@ export default function GameOperationsPage() {
               </div>
             </div>
 
-            {/* Spin Wheel Controls */}
+            {/* Wheel Challenge Controls */}
             <div className="p-5 space-y-5">
               <div className="space-y-3">
                 <label className="text-sm font-semibold text-gray-400">Logic Mode</label>

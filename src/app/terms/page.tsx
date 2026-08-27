@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     "terms and conditions",
     "user agreement",
     "RealSpinPro",
-    "casino rules",
+    "gaming rules",
     "fair play",
     "eligibility",
   ],

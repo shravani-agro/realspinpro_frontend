@@ -12,8 +12,8 @@ const STEPS = [
   },
   {
     icon: Coins,
-    title: "Place Your Bets",
-    desc: "Choose from our adrenaline-pumping live games and place your bets to watch the multipliers climb.",
+    title: "Enter the Arena",
+    desc: "Choose from our adrenaline-pumping live games and start playing to watch the multipliers climb.",
     color: "neon-purple"
   },
   {
