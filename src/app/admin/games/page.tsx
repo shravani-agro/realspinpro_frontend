@@ -264,6 +264,7 @@ export default function GameOperationsPage() {
         {/* ========================================================= */}
         {/* ==================== BOOM MINE ========================== */}
         {/* ========================================================= */}
+        {/*
         <div className="space-y-6">
           <div className="glass-panel rounded-2xl border border-neon-emerald/20 overflow-hidden">
             <div className="p-5 border-b border-white/5 bg-gradient-to-r from-neon-emerald/10 to-transparent">
@@ -272,7 +273,7 @@ export default function GameOperationsPage() {
               </h2>
             </div>
             
-            {/* Boom Mine Stats */}
+            // Boom Mine Stats
             <div className="p-5 grid grid-cols-3 gap-4 border-b border-white/5 bg-black/20">
               <div>
                 <p className="text-xs text-gray-500 mb-1">Total Wagered</p>
@@ -290,7 +291,7 @@ export default function GameOperationsPage() {
               </div>
             </div>
 
-            {/* Boom Mine Controls */}
+            // Boom Mine Controls
             <div className="p-5 space-y-5">
               <div className="space-y-3 bg-black/20 p-4 rounded-xl border border-white/5">
                 <label className="flex items-center justify-between text-sm font-semibold text-gray-300">
@@ -326,10 +327,12 @@ export default function GameOperationsPage() {
             </div>
           </div>
         </div>
+        */}
 
-        {/* ========================================================= */}
-        {/* ==================== TOSS TOSS ========================== */}
-        {/* ========================================================= */}
+        // ========================================================= 
+        // ==================== TOSS TOSS ========================== 
+        // ========================================================= 
+        {/*
         <div className="space-y-6">
           <div className="glass-panel rounded-2xl border border-neon-blue/20 overflow-hidden">
             <div className="p-5 border-b border-white/5 bg-gradient-to-r from-neon-blue/10 to-transparent">
@@ -338,7 +341,7 @@ export default function GameOperationsPage() {
               </h2>
             </div>
             
-            {/* Toss Toss Stats */}
+            // Toss Toss Stats
             <div className="p-5 grid grid-cols-3 gap-4 border-b border-white/5 bg-black/20">
               <div>
                 <p className="text-xs text-gray-500 mb-1">Total Wagered</p>
@@ -391,6 +394,7 @@ export default function GameOperationsPage() {
             </div>
           </div>
         </div>
+        */}
       </div>
     </div>
   );

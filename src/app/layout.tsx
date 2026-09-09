@@ -22,14 +22,12 @@ export const metadata: Metadata = {
     template: "%s | RealSpinPro",
   },
   description:
-    "Join the ultimate wheel challenge experience. Play daily, unlock massive rewards, and climb the leaderboard. Play BoomMine, Pro Challenge, Wheel Challenge, and Toss Toss with provably fair algorithms.",
+    "Join the ultimate wheel challenge experience. Play daily, unlock massive rewards, and climb the leaderboard. Play Wheel Challenge with provably fair algorithms.",
   keywords: [
     "wheel challenge",
     "gaming",
     "online gaming",
     "provably fair",
-    "BoomMine",
-    "mines game",
     "crypto gaming",
     "instant payouts",
     "daily jackpots",

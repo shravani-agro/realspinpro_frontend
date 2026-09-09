@@ -15,14 +15,9 @@ import { Reveal } from "@/components/Reveal";
 export const metadata: Metadata = {
   title: "Premium Gaming | RealSpinPro",
   description:
-    "Play 4 premium Entertainment Games at RealSpinPro — Wheel Challenge, BoomMine, Pro Challenge & Toss Toss. Daily jackpots, instant payouts, provably fair, 18+ only.",
+    "Play premium Entertainment Games at RealSpinPro — Wheel Challenge. Daily jackpots, instant payouts, provably fair, 18+ only.",
   keywords: [
     "wheel challenge",
-    "BoomMine",
-    "mines game",
-    "Pro Challenge",
-    "Toss Toss",
-    "Entertainment Games",
     "provably fair",
     "instant payouts",
     "daily jackpots",
@@ -32,14 +27,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Premium Gaming | RealSpinPro",
     description:
-      "Play 4 premium Entertainment Games at RealSpinPro — Wheel Challenge, BoomMine, Pro Challenge & Toss Toss. Daily jackpots, instant payouts, provably fair, 18+ only.",
+      "Play premium Entertainment Games at RealSpinPro — Wheel Challenge. Daily jackpots, instant payouts, provably fair, 18+ only.",
     url: "https://realspinpro.com/",
     images: ["/logo.png"],
   },
   twitter: {
     title: "Premium Gaming | RealSpinPro",
     description:
-      "Play 4 premium Entertainment Games at RealSpinPro — Wheel Challenge, BoomMine, Pro Challenge & Toss Toss. Daily jackpots, instant payouts, provably fair, 18+ only.",
+      "Play premium Entertainment Games at RealSpinPro — Wheel Challenge. Daily jackpots, instant payouts, provably fair, 18+ only.",
     images: ["/logo.png"],
   },
 };
@@ -55,8 +50,8 @@ export default function Home() {
             "@type": "WebSite",
             "name": "RealSpinPro",
             "url": "https://realspinpro.com",
-            "description": "Premium gaming platform with 4 Entertainment Games, provably fair algorithms, and instant payouts.",
-            "keywords": "wheel challenge, gaming, mines game, provably fair, entertainment games, instant payouts",
+            "description": "Premium gaming platform with Wheel Challenge, provably fair algorithms, and instant payouts.",
+            "keywords": "wheel challenge, gaming, provably fair, entertainment games, instant payouts",
             "publisher": {
               "@type": "Organization",
               "name": "RealSpinPro",
@@ -76,9 +71,9 @@ export default function Home() {
             "@type": "Game",
             "name": "RealSpinPro - Premium Entertainment Games",
             "url": "https://realspinpro.com",
-            "description": "Play 4 premium games: Wheel Challenge, BoomMine, Pro Challenge, and Toss Toss with provably fair algorithms and instant payouts.",
-            "genre": ["Gaming", "Gaming", "Minesweeper"],
-            "gameItem": ["Wheel Challenge", "BoomMine", "Pro Challenge", "Toss Toss"],
+            "description": "Play our premium game: Wheel Challenge with provably fair algorithms and instant payouts.",
+            "genre": ["Gaming", "Gaming"],
+            "gameItem": ["Wheel Challenge"],
             "offers": {
               "@type": "Offer",
               "price": "0",
@@ -100,7 +95,7 @@ export default function Home() {
                 "name": "What is RealSpinPro?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "RealSpinPro is a premium online gaming platform offering 4 Entertainment Games — Wheel Challenge, BoomMine, Pro Challenge, and Toss Toss — with provably fair algorithms and instant payouts."
+                  "text": "RealSpinPro is a premium online gaming platform offering the Wheel Challenge with provably fair algorithms and instant payouts."
                 }
               },
               {

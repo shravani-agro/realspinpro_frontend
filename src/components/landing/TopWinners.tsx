@@ -6,11 +6,11 @@ import { DownloadButton } from "@/components/DownloadButton";
 import { useState, useEffect } from "react";
 
 const FALLBACK_WINNERS = [
-  { rank: 1, user: "Rahul K.", game: "Boommine", multiplier: "1,250x", payout: "₹1,25,000", color: "#ffd700", glow: "rgba(255, 215, 0, 0.4)" },
-  { rank: 2, user: "Vikram S.", game: "Pro Challenge", multiplier: "850x", payout: "₹85,000", color: "#e2e8f0", glow: "rgba(255, 255, 255, 0.3)" },
-  { rank: 3, user: "Pooja M.", game: "Toss Toss", multiplier: "500x", payout: "₹50,000", color: "#cd7f32", glow: "rgba(205, 127, 50, 0.3)" },
+  { rank: 1, user: "Rahul K.", game: "Wheel Challenge", multiplier: "1,250x", payout: "₹1,25,000", color: "#ffd700", glow: "rgba(255, 215, 0, 0.4)" },
+  { rank: 2, user: "Vikram S.", game: "Wheel Challenge", multiplier: "850x", payout: "₹85,000", color: "#e2e8f0", glow: "rgba(255, 255, 255, 0.3)" },
+  { rank: 3, user: "Pooja M.", game: "Wheel Challenge", multiplier: "500x", payout: "₹50,000", color: "#cd7f32", glow: "rgba(205, 127, 50, 0.3)" },
   { rank: 4, user: "Amit D.", game: "Wheel Challenge", multiplier: "250x", payout: "₹25,000", color: "#ff007f", glow: "rgba(255, 0, 127, 0.2)" },
-  { rank: 5, user: "Suresh P.", game: "Boommine", multiplier: "100x", payout: "₹10,000", color: "#00f3ff", glow: "rgba(0, 243, 255, 0.2)" },
+  { rank: 5, user: "Suresh P.", game: "Wheel Challenge", multiplier: "100x", payout: "₹10,000", color: "#00f3ff", glow: "rgba(0, 243, 255, 0.2)" },
 ];
 
 export function TopWinners() {

@@ -6,7 +6,7 @@ import { Target, Trophy, Unlock, Gamepad2 } from "lucide-react";
 const STEPS = [
   {
     title: "Choose Your Match",
-    desc: "Select from our premium lineup of skill-based challenges like the Wheel Challenge and BoomMine.",
+    desc: "Select from our premium lineup of skill-based challenges like the Wheel Challenge.",
     icon: Gamepad2,
     color: "#00f3ff",
   },

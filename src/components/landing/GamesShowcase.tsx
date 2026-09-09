@@ -5,6 +5,7 @@ import { Play, Sparkles, Trophy } from "lucide-react";
 import Image from "next/image";
 
 const GAMES = [
+  /*
   {
     id: 1,
     name: "Boommine",
@@ -25,6 +26,7 @@ const GAMES = [
     tag: "Popular",
     badgeColor: "bg-purple-500/20 text-purple-300 border-purple-500/30"
   },
+  */
   {
     id: 3,
     name: "Wheel Challenge",
@@ -35,6 +37,7 @@ const GAMES = [
     tag: "Hot Reward",
     badgeColor: "bg-pink-500/20 text-pink-300 border-pink-500/30"
   },
+  /*
   {
     id: 4,
     name: "Toss Toss",
@@ -45,6 +48,7 @@ const GAMES = [
     tag: "Double Up",
     badgeColor: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
   },
+  */
 ];
 
 export function GamesShowcase() {
@@ -60,7 +64,7 @@ export function GamesShowcase() {
         <div className="text-center mb-16 md:mb-20">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border border-gaming-gold/30 bg-gaming-gold/5 text-gaming-gold text-xs font-bold tracking-widest uppercase">
             <Trophy className="w-4 h-4 text-gaming-gold" />
-            <span>4 Exhilarating Arenas</span>
+            <span>Exhilarating Arena</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black mb-4 text-white">
             CHOOSE YOUR <span className="neon-text-gold">GAME</span>

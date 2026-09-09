@@ -30,6 +30,7 @@ const NAV_GROUPS = [
           { name: "Stats", href: "/admin/games/spinwheel/stats" },
         ]
       },
+      /*
       {
         name: "BoomMine",
         icon: Bomb,
@@ -48,6 +49,7 @@ const NAV_GROUPS = [
           { name: "Stats", href: "/admin/games/tosstoss/stats" },
         ]
       },
+      */
     ]
   },
   {
