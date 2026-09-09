@@ -38,7 +38,7 @@ export default function TransactionsPage() {
       setProcessingId(id);
       await updateAdminTransactionStatus(id.toString(), status);
       // Optimistic update
-      setTransactions((prev) => 
+      setTransactions((prev) =>
         prev.map(tx => tx.id === id ? { ...tx, status } : tx)
       );
       toast.success(`Transaction ${status === 'success' ? 'approved' : 'rejected'} successfully.`);
@@ -74,7 +74,7 @@ export default function TransactionsPage() {
       <div className="glass-panel p-4 rounded-2xl border border-white/5 flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-          <input 
+          <input
             type="text"
             placeholder="Search TX ID or User..."
             className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-white focus:outline-none focus:border-neon-blue/50 transition-colors"
@@ -87,22 +87,21 @@ export default function TransactionsPage() {
             <button
               key={type}
               onClick={() => setTypeFilter(type)}
-              className={`px-4 py-2.5 rounded-xl text-sm font-semibold capitalize transition-colors ${
-                typeFilter === type 
-                  ? "bg-white/10 text-white border border-white/20" 
-                  : "bg-transparent text-gray-400 border border-transparent hover:bg-white/5"
-              }`}
+              className={`px-4 py-2.5 rounded-xl text-sm font-semibold capitalize transition-colors ${typeFilter === type
+                ? "bg-white/10 text-white border border-white/20"
+                : "bg-transparent text-gray-400 border border-transparent hover:bg-white/5"
+                }`}
             >
               {type}s
             </button>
           ))}
         </div>
       </div>
-      
+
       <div className="flex gap-4 mb-4">
         <div className="flex flex-col gap-1 text-sm text-gray-400">
           <label>Start Date</label>
-          <input 
+          <input
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
@@ -111,7 +110,7 @@ export default function TransactionsPage() {
         </div>
         <div className="flex flex-col gap-1 text-sm text-gray-400">
           <label>End Date</label>
-          <input 
+          <input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
@@ -119,7 +118,7 @@ export default function TransactionsPage() {
           />
         </div>
         <div className="flex items-end pb-1">
-          <button 
+          <button
             onClick={() => { setStartDate(""); setEndDate(""); }}
             className="text-red-400 hover:text-red-300 px-2 py-1 text-sm"
           >
@@ -187,15 +186,15 @@ export default function TransactionsPage() {
                       {tx.status === "pending" ? (
                         tx.type === "withdrawal" ? (
                           <div className="flex justify-end gap-2">
-                            <button 
+                            <button
                               disabled={processingId === tx.id}
                               onClick={() => handleUpdateStatus(tx.id, "success")}
                               className="p-2 bg-neon-emerald/10 hover:bg-neon-emerald/20 text-neon-emerald rounded-lg transition-colors border border-neon-emerald/20 disabled:opacity-50"
-                              title="Approve & Send via PayfromUPI"
+                              title="Approve & Send via Cashfree"
                             >
                               {processingId === tx.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
                             </button>
-                            <button 
+                            <button
                               disabled={processingId === tx.id}
                               onClick={() => handleUpdateStatus(tx.id, "failed")}
                               className="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg transition-colors border border-red-500/20 disabled:opacity-50"
@@ -206,8 +205,8 @@ export default function TransactionsPage() {
                           </div>
                         ) : (
                           <div className="flex justify-end gap-2">
-                            <span className="text-xs text-gray-500 italic mr-2">Auto-verifying via PayfromUPI</span>
-                            <button 
+                            <span className="text-xs text-gray-500 italic mr-2">Auto-verifying via Cashfree</span>
+                            <button
                               disabled={processingId === tx.id}
                               onClick={() => handleUpdateStatus(tx.id, "failed")}
                               className="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg transition-colors border border-red-500/20 disabled:opacity-50"
