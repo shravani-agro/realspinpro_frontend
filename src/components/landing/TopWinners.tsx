@@ -3,8 +3,9 @@
 import { motion } from "framer-motion";
 import { Trophy, TrendingUp } from "lucide-react";
 import { DownloadButton } from "@/components/DownloadButton";
+import { useState, useEffect } from "react";
 
-const WINNERS = [
+const FALLBACK_WINNERS = [
   { rank: 1, user: "Rahul K.", game: "Boommine", multiplier: "1,250x", payout: "₹1,25,000", color: "#ffd700", glow: "rgba(255, 215, 0, 0.4)" },
   { rank: 2, user: "Vikram S.", game: "Pro Challenge", multiplier: "850x", payout: "₹85,000", color: "#e2e8f0", glow: "rgba(255, 255, 255, 0.3)" },
   { rank: 3, user: "Pooja M.", game: "Toss Toss", multiplier: "500x", payout: "₹50,000", color: "#cd7f32", glow: "rgba(205, 127, 50, 0.3)" },
@@ -13,6 +14,34 @@ const WINNERS = [
 ];
 
 export function TopWinners() {
+  const [winners, setWinners] = useState<any[]>([]);
+  
+  useEffect(() => {
+    fetch('/api-proxy/winners/recent')
+      .then(res => res.json())
+      .then(data => {
+        if (data && Array.isArray(data) && data.length > 0) {
+          const colors = ["#ffd700", "#e2e8f0", "#cd7f32", "#ff007f", "#00f3ff"];
+          const glows = ["rgba(255, 215, 0, 0.4)", "rgba(255, 255, 255, 0.3)", "rgba(205, 127, 50, 0.3)", "rgba(255, 0, 127, 0.2)", "rgba(0, 243, 255, 0.2)"];
+          const formatted = data.slice(0, 5).map((w, i) => ({
+            rank: i + 1,
+            user: w.username || `User_${w.user_id}`,
+            game: w.game === 'spinwheel' ? 'Spinwheel' : (w.game === 'spinwheelpro' ? 'Pro Challenge' : w.game),
+            multiplier: w.multiplier ? `${w.multiplier}x` : "Win",
+            payout: `₹${w.payout}`,
+            color: colors[i] || colors[4],
+            glow: glows[i] || glows[4]
+          }));
+          setWinners(formatted);
+        } else {
+          setWinners(FALLBACK_WINNERS);
+        }
+      })
+      .catch(() => setWinners(FALLBACK_WINNERS));
+  }, []);
+
+  const displayWinners = winners.length > 0 ? winners : FALLBACK_WINNERS;
+
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Premium gradient backdrop (no image) */}
@@ -62,7 +91,7 @@ export function TopWinners() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5 font-semibold">
-                {WINNERS.map((winner, i) => (
+                {displayWinners.map((winner, i) => (
                   <motion.tr
                     key={winner.rank}
                     initial={{ opacity: 0, x: -30 }}

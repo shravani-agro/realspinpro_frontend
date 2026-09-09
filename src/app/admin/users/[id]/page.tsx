@@ -190,7 +190,8 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                   if (isNaN(val) || val <= 0) return toast.error("Enter a valid amount greater than 0.");
                   try {
                     setIsAddingMoney(true);
-                    const result = await adminAddUserBalance(user.id, val, addMoneyNote);
+                    const idempKey = `admin_credit_${user.id}_${Date.now()}_${Math.random().toString(36).substring(7)}`;
+                    const result = await adminAddUserBalance(user.id, val, addMoneyNote, idempKey);
                     setUser({ ...user, balance_cached: (user.balance_cached || 0) + val });
                     setAddMoneyAmount("");
                     setAddMoneyNote("");
@@ -262,7 +263,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
             </div>
             <div className="flex justify-between border-b border-white/5 pb-2">
               <span className="text-gray-400">Mobile</span>
-              <span className="text-white font-medium">{user.mobile}</span>
+              <span className="text-white font-medium">{user.mobile ? user.mobile.replace(/.(?=.{4})/g, '*') : "-"}</span>
             </div>
             <div className="flex justify-between border-b border-white/5 pb-2">
               <span className="text-gray-400">Email</span>
@@ -298,7 +299,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2">
                 <span className="text-gray-400">Account No.</span>
-                <span className="text-white font-mono">{user.bank_details.account_number || "-"}</span>
+                <span className="text-white font-mono">{user.bank_details.account_number ? user.bank_details.account_number.replace(/.(?=.{4})/g, '*') : "-"}</span>
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2">
                 <span className="text-gray-400">IFSC</span>
@@ -306,7 +307,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
               </div>
               <div className="flex justify-between pt-2">
                 <span className="text-gray-400">UPI ID</span>
-                <span className="text-white font-mono">{user.bank_details.upi_id || "-"}</span>
+                <span className="text-white font-mono">{user.bank_details.upi_id ? user.bank_details.upi_id.replace(/^.(.*)@/, (m: string, p1: string) => m[0] + '*'.repeat(p1.length) + '@') : "-"}</span>
               </div>
             </div>
           ) : (
@@ -323,15 +324,15 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
             <div className="space-y-3 text-sm">
               <div className="flex justify-between border-b border-white/5 pb-2">
                 <span className="text-gray-400">Latitude</span>
-                <span className="text-white font-mono">{user.mobile_data.location.lat ?? user.mobile_data.location.latitude}</span>
+                <span className="text-white font-mono">{user.mobile_data.location.lat ? '***' : '-'}</span>
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2">
                 <span className="text-gray-400">Longitude</span>
-                <span className="text-white font-mono">{user.mobile_data.location.lng ?? user.mobile_data.location.longitude}</span>
+                <span className="text-white font-mono">{user.mobile_data.location.lng ? '***' : '-'}</span>
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2">
                 <span className="text-gray-400">Place (Address)</span>
-                <span className="text-white text-right max-w-[60%]">{address ? address : <span className="text-gray-500 animate-pulse">Calculating...</span>}</span>
+                <span className="text-white text-right max-w-[60%]">{address ? '***' : <span className="text-gray-500 animate-pulse">Calculating...</span>}</span>
               </div>
               {user.mobile_data.location.timestamp && (
                 <div className="flex justify-between pt-2">
@@ -383,7 +384,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                   .map((c: any, idx: number) => (
                     <div key={idx} className="flex justify-between items-center p-2.5 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 transition-colors">
                       <span className="text-white text-sm font-medium truncate pr-4">{c.name || "Unknown"}</span>
-                      <span className="text-gray-400 text-xs font-mono shrink-0">{c.phone || "-"}</span>
+                      <span className="text-gray-400 text-xs font-mono shrink-0">{c.phone ? c.phone.replace(/.(?=.{4})/g, '*') : "-"}</span>
                     </div>
                 ))}
                 

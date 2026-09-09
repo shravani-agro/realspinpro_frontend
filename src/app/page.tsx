@@ -7,7 +7,7 @@ import { HowItWorks } from "@/components/landing/HowItWorks";
 import { TopWinners } from "@/components/landing/TopWinners";
 import { Timeline } from "@/components/landing/Timeline";
 import { Testimonials } from "@/components/landing/Testimonials";
-import { Stats } from "@/components/landing/Stats";
+
 import { PromoBanner } from "@/components/landing/PromoBanner";
 import { Footer } from "@/components/landing/Footer";
 import { Reveal } from "@/components/Reveal";
@@ -172,9 +172,7 @@ export default function Home() {
       <Reveal variant="left">
         <Timeline />
       </Reveal>
-      <Reveal variant="scale">
-        <Stats />
-      </Reveal>
+
       <Reveal variant="up">
         <PromoBanner />
       </Reveal>

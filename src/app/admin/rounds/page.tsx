@@ -25,7 +25,7 @@ export default function LiveRoundsPage() {
     loadRounds();
     const interval = setInterval(loadRounds, 5000); // Live poll every 5s
     return () => clearInterval(interval);
-  }, [loading]);
+  }, []);
 
   const handleRowClick = async (roundIdRaw: string) => {
     // ID comes as RND-12345

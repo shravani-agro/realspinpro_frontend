@@ -33,7 +33,7 @@ export default function AnalyticsPage() {
   const gameData = stats?.game_stats?.map((g: any) => ({
     name: g.name === 'spinwheel' ? 'Spinwheel' : (g.name === 'spinwheelpro' ? 'Spinwheel Pro' : g.name),
     value: g.total_bets_count,
-  })) || [{ name: "Spinwheel", value: 100 }]; // fallback if no data
+  })) || []; // fallback if no data
 
   return (
     <div className="space-y-6">

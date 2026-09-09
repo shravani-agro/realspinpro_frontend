@@ -12,12 +12,13 @@ export default function WalletPage() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [balData, txs] = await Promise.all([
+        const [balResult, txsResult] = await Promise.allSettled([
           fetchGatewayBalance(),
           fetchAdminTransactions()
         ]);
-        setGatewayBalance(balData?.balance || "₹0.00");
-        setTransactions(txs || []);
+        
+        setGatewayBalance(balResult.status === 'fulfilled' ? (balResult.value?.balance || "₹0.00") : "Error");
+        setTransactions(txsResult.status === 'fulfilled' ? (txsResult.value || []) : []);
       } catch (err) {
         console.error("Error loading wallet data:", err);
       } finally {

@@ -3,12 +3,7 @@
 import { Bell, AlertTriangle, ShieldAlert, CheckCircle, Info } from "lucide-react";
 import { useState } from "react";
 
-const MOCK_NOTIFS = [
-  { id: 1, type: "alert", title: "Suspicious Betting Pattern", message: "User User_892 won 14 consecutive bets on Cyber Roulette.", time: "2 mins ago", read: false },
-  { id: 2, type: "info", title: "Large Deposit", message: "Whale_BTC just deposited 2.5 BTC (₹1.4Cr).", time: "15 mins ago", read: false },
-  { id: 3, type: "system", title: "Server Load High", message: "Game servers are experiencing 85% capacity. Consider scaling.", time: "1 hour ago", read: true },
-  { id: 4, type: "success", title: "Maintenance Complete", message: "Database optimization finished successfully in 45s.", time: "3 hours ago", read: true },
-];
+const MOCK_NOTIFS: any[] = [];
 
 export default function NotificationsPage() {
   const [notifs, setNotifs] = useState(MOCK_NOTIFS);

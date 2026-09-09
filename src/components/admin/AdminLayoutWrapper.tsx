@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Sidebar } from "./Sidebar";
 import { Navbar } from "./Navbar";
 import { usePathname, useRouter } from "next/navigation";
+import { fetchAdminSettings } from "@/lib/api";
 
 export function AdminLayoutWrapper({ children }: { children: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,22 +13,26 @@ export function AdminLayoutWrapper({ children }: { children: React.ReactNode }) 
 
   const isLoginPage = pathname === "/admin/login" || pathname === "/login";
 
-  // Initialize auth state synchronously from localStorage so we never show a stuck "Loading...".
-  // Trust either the persisted admin profile OR the admin token (set by either login page).
-  const [isAuthenticated] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    if (isLoginPage) return true;
-    const hasSession =
-      !!localStorage.getItem("adminUser") || !!localStorage.getItem("adminToken");
-    return hasSession;
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isVerifying, setIsVerifying] = useState<boolean>(true);
 
   useEffect(() => {
-    if (isLoginPage) return;
-    const user = localStorage.getItem("adminUser");
-    if (!user) {
-      router.replace("/admin/login");
+    if (isLoginPage) {
+      setIsVerifying(false);
+      return;
     }
+    
+    // Verify session with the backend using HttpOnly cookie
+    fetchAdminSettings()
+      .then(() => {
+        setIsAuthenticated(true);
+        setIsVerifying(false);
+      })
+      .catch(() => {
+        // fetchAdminSettings triggers handleResponse which redirects on 401, 
+        // but just in case, we do it here too
+        router.replace("/admin/login");
+      });
   }, [isLoginPage, router]);
 
   // If on login page, just render children without sidebar/navbar
@@ -40,7 +45,7 @@ export function AdminLayoutWrapper({ children }: { children: React.ReactNode }) 
     );
   }
 
-  if (!isAuthenticated) {
+  if (!isAuthenticated && isVerifying) {
     return (
       <div className="min-h-screen bg-[#050505] flex items-center justify-center">
         <div className="w-8 h-8 rounded-full border-t-2 border-r-2 border-neon-blue animate-spin" />

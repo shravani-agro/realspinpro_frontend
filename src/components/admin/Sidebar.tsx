@@ -180,11 +180,12 @@ export function Sidebar({ onCloseMobile }: { onCloseMobile?: () => void }) {
 
       <div className="p-4 border-t border-white/5 shrink-0">
         <button 
-          onClick={() => {
-            localStorage.removeItem("adminToken");
-            localStorage.removeItem("adminUser");
-            document.cookie = "admin_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-            router.push("/login");
+          onClick={async () => {
+            try {
+              // Call the backend logout to clear the HttpOnly cookie
+              await fetch('/api-proxy/admin/logout', { method: 'POST' });
+            } catch (e) {}
+            router.push("/admin/login");
           }}
           className="flex items-center gap-3 w-full px-3 py-2 text-gray-400 hover:text-red-400 transition-colors rounded-lg hover:bg-red-500/10"
         >

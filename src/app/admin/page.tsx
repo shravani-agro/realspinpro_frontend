@@ -15,11 +15,15 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState<any>(null);
   const [liveFeed, setLiveFeed] = useState<any[]>([]);
   const [gatewayBalance, setGatewayBalance] = useState<string>("0.00");
+  const [viewMode, setViewMode] = useState<"24h" | "all">("24h");
 
   useEffect(() => {
+    let failCount = 0;
+    let timer: NodeJS.Timeout;
+
     const loadData = async () => {
       try {
-        const statsData = await fetchAdminStats();
+        const statsData = await fetchAdminStats(viewMode);
         setStats(statsData);
 
         const feedData = await fetchAdminFeed();
@@ -29,15 +33,19 @@ export default function AdminDashboard() {
         if (gatewayData?.balance) {
           setGatewayBalance(gatewayData.balance);
         }
+        failCount = 0;
+        timer = setTimeout(loadData, 5000);
       } catch (err) {
         console.error("Error loading dashboard data", err);
+        failCount++;
+        const backoff = Math.min(5000 * Math.pow(2, failCount), 60000);
+        timer = setTimeout(loadData, backoff);
       }
     };
 
     loadData();
-    const interval = setInterval(loadData, 5000); // Poll every 5s
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [viewMode]);
 
   const formatCurrency = (val: number) => `₹${(val || 0).toLocaleString()}`;
   const formatPercent = (val: number) => `${(val || 0).toFixed(2)}%`;
@@ -70,9 +78,18 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map((kpi, i) => (
           <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="p-5 rounded-xl glass-panel relative overflow-hidden group">
-            <div className={`absolute top-0 right-0 w-20 h-20 bg-${kpi.color}/10 rounded-full blur-xl -mr-8 -mt-8 group-hover:bg-${kpi.color}/20 transition-colors`} />
+            {kpi.color === 'neon-blue' && <div className="absolute top-0 right-0 w-20 h-20 bg-neon-blue/10 rounded-full blur-xl -mr-8 -mt-8 group-hover:bg-neon-blue/20 transition-colors" />}
+            {kpi.color === 'neon-purple' && <div className="absolute top-0 right-0 w-20 h-20 bg-neon-purple/10 rounded-full blur-xl -mr-8 -mt-8 group-hover:bg-neon-purple/20 transition-colors" />}
+            {kpi.color === 'neon-magenta' && <div className="absolute top-0 right-0 w-20 h-20 bg-neon-magenta/10 rounded-full blur-xl -mr-8 -mt-8 group-hover:bg-neon-magenta/20 transition-colors" />}
+            {kpi.color === 'neon-emerald' && <div className="absolute top-0 right-0 w-20 h-20 bg-neon-emerald/10 rounded-full blur-xl -mr-8 -mt-8 group-hover:bg-neon-emerald/20 transition-colors" />}
+            
             <div className="flex justify-between items-start mb-3 relative z-10">
-              <div className={`p-2 rounded-lg bg-${kpi.color}/10 border border-${kpi.color}/20 text-${kpi.color}`} title={kpi.tooltip}>
+              <div className={`p-2 rounded-lg border ${
+                kpi.color === 'neon-blue' ? 'bg-neon-blue/10 border-neon-blue/20 text-neon-blue' :
+                kpi.color === 'neon-purple' ? 'bg-neon-purple/10 border-neon-purple/20 text-neon-purple' :
+                kpi.color === 'neon-magenta' ? 'bg-neon-magenta/10 border-neon-magenta/20 text-neon-magenta' :
+                'bg-neon-emerald/10 border-neon-emerald/20 text-neon-emerald'
+              }`} title={kpi.tooltip}>
                 <kpi.icon className="w-4 h-4" />
               </div>
             </div>
@@ -92,8 +109,8 @@ export default function AdminDashboard() {
           <p className="text-gray-400 text-sm mt-1">Live analytics and performance metrics</p>
         </div>
         <div className="flex gap-2">
-          <button className="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-gray-300 hover:text-white transition-colors">24h</button>
-          <button className="px-3 py-1.5 rounded-md bg-neon-blue/20 border border-neon-blue/50 text-sm text-neon-blue shadow-[0_0_10px_rgba(0,243,255,0.2)]">All Time</button>
+          <button onClick={() => setViewMode("24h")} className={`px-3 py-1.5 rounded-md border text-sm transition-colors ${viewMode === "24h" ? "bg-neon-blue/20 border-neon-blue/50 text-neon-blue shadow-[0_0_10px_rgba(0,243,255,0.2)]" : "bg-white/5 border-white/10 text-gray-300 hover:text-white"}`}>24h</button>
+          <button onClick={() => setViewMode("all")} className={`px-3 py-1.5 rounded-md border text-sm transition-colors ${viewMode === "all" ? "bg-neon-blue/20 border-neon-blue/50 text-neon-blue shadow-[0_0_10px_rgba(0,243,255,0.2)]" : "bg-white/5 border-white/10 text-gray-300 hover:text-white"}`}>All Time</button>
         </div>
       </div>
 

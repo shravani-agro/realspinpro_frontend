@@ -36,14 +36,15 @@ export default function SupportPage() {
     };
     loadChats();
 
-    // Setup WebSocket with absolute URL
+    // Setup WebSocket using the Next.js API Proxy which handles cross-site cookies
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const host = window.location.host;
-    const wsUrl = `${protocol}//${host}${API_BASE_URL}/admin/support/ws`;
-    const token = localStorage.getItem('adminToken');
+    const wsUrl = `${protocol}//${window.location.host}/api-proxy/admin/support/ws`;
     
-    if (token) {
-      const ws = new WebSocket(`${wsUrl}?token=${token}`);
+    let reconnectAttempts = 0;
+    
+    const connectWS = () => {
+      // The backend AuthMiddleware will parse the token from HttpOnly cookie
+      const ws = new WebSocket(wsUrl);
       
       ws.onmessage = (event) => {
         try {
@@ -55,19 +56,8 @@ export default function SupportPage() {
             const newMsg = payload.message;
             const userId = payload.user_id;
             
-            // Update messages if this chat is active
-            setMessages(prev => {
-              // Note: selectedUser is captured in closure, so we use a functional update that relies on a ref or we just re-evaluate if we can.
-              // To avoid stale state for selectedUser, we can just let a separate effect handle active chat messages, or update the list directly here.
-              // Wait, functional update doesn't have access to selectedUser without it being in dependency array.
-              return prev;
-            });
-            
-            // We'll handle appending to active messages via a ref or by just letting the chat list update and re-fetching if needed.
-            // Actually, we can dispatch a custom event.
             window.dispatchEvent(new CustomEvent('new_admin_ws_message', { detail: { userId, message: newMsg } }));
             
-            // Update chat list
             setChats(prevChats => {
               const chatIndex = prevChats.findIndex(c => c.user_id === userId);
               if (chatIndex >= 0) {
@@ -77,17 +67,10 @@ export default function SupportPage() {
                 chat.last_message_time = newMsg.created_at;
                 chat.updated_at = newMsg.created_at;
                 
-                // If it's from user, increment unread if not selected
-                if (newMsg.sender_type === 'user') {
-                  // We'll rely on the CustomEvent listener to handle unread count accurately.
-                }
-                
-                // Move to top
                 updatedChats.splice(chatIndex, 1);
                 updatedChats.unshift(chat);
                 return updatedChats;
               }
-              // If new chat, reload list
               loadChats();
               return prevChats;
             });
@@ -97,12 +80,27 @@ export default function SupportPage() {
         }
       };
       
-      wsRef.current = ws;
-      
-      return () => {
-        ws.close();
+      ws.onclose = () => {
+        const timeout = Math.min(1000 * Math.pow(2, reconnectAttempts), 30000);
+        reconnectAttempts++;
+        setTimeout(connectWS, timeout);
       };
-    }
+      
+      ws.onopen = () => {
+        reconnectAttempts = 0;
+      };
+      
+      wsRef.current = ws;
+    };
+    
+    connectWS();
+    
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.onclose = null; // Prevent reconnect on unmount
+        wsRef.current.close();
+      }
+    };
   }, []);
 
   // Handle active chat messages and CustomEvent

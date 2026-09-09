@@ -10,6 +10,7 @@ import { formatIST } from "@/utils/dateFormatter";
 export default function UsersPage() {
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetchAdminUsers()
@@ -31,9 +32,15 @@ export default function UsersPage() {
         <div className="flex gap-4">
           <div className="relative">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
-            <input type="text" placeholder="Search users..." className="pl-9 pr-4 py-2 rounded-lg bg-black/50 border border-white/10 text-sm focus:outline-none focus:border-neon-blue/50 text-white w-64" />
+            <input 
+              type="text" 
+              placeholder="Search users..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-9 pr-4 py-2 rounded-lg bg-black/50 border border-white/10 text-sm focus:outline-none focus:border-neon-blue/50 text-white w-64" 
+            />
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-black/50 border border-white/10 text-sm text-gray-300 hover:text-white transition-colors">
+          <button onClick={() => toast.info("Advanced filters coming soon!")} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-black/50 border border-white/10 text-sm text-gray-300 hover:text-white transition-colors">
             <Filter className="w-4 h-4" /> Filters
           </button>
         </div>
@@ -58,14 +65,18 @@ export default function UsersPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {users.map((user) => (
+                {users.filter(u => 
+                  (u.username && u.username.toLowerCase().includes(searchTerm.toLowerCase())) || 
+                  (u.mobile && u.mobile.includes(searchTerm)) || 
+                  (u.email && u.email.toLowerCase().includes(searchTerm.toLowerCase()))
+                ).map((user) => (
                   <tr key={user.id} className="hover:bg-white/[0.02] transition-colors group">
                     <td className="px-6 py-4 font-mono text-gray-500">#{user.id}</td>
                     <td className="px-6 py-4">
                       <div className="font-medium text-white">{user.username || "Anonymous"}</div>
                       <div className="text-xs text-gray-500">{user.mobile}</div>
                     </td>
-                    <td className="px-6 py-4 font-mono font-bold text-white tracking-widest">{user.pin || "******"}</td>
+                    <td className="px-6 py-4 font-mono font-bold text-white tracking-widest">***</td>
                     <td className="px-6 py-4 text-gray-400">{user.email || "-"}</td>
                     <td className="px-6 py-4 font-mono text-neon-blue group-hover:drop-shadow-[0_0_5px_var(--color-neon-blue)] transition-all">₹{user.balance_cached}</td>
                     <td className="px-6 py-4">
@@ -89,7 +100,7 @@ export default function UsersPage() {
                 ))}
                 {users.length === 0 && (
                   <tr>
-                    <td colSpan={7} className="text-center py-8 text-gray-500">No users found</td>
+                    <td colSpan={8} className="text-center py-8 text-gray-500">No users found</td>
                   </tr>
                 )}
               </tbody>

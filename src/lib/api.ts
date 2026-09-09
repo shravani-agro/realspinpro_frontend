@@ -8,14 +8,7 @@ export function getAdminHeaders(customHeaders: Record<string, string> = {}): Rec
   const headers: Record<string, string> = { ...customHeaders };
   // Add CSRF protection header for state-changing endpoints
   headers['X-Requested-With'] = 'XMLHttpRequest';
-  
-  // Read the token securely from the HttpOnly cookie, OR use localStorage fallback for local testing
-  if (typeof window !== 'undefined') {
-    const token = localStorage.getItem("adminToken");
-    if (token) {
-      headers['Authorization'] = `Bearer ${token}`;
-    }
-  }
+  // Auth token is securely managed via HttpOnly cookies by the backend
   return headers;
 }
 
@@ -37,6 +30,13 @@ async function apiFetch(url: string, init: RequestInit = {}): Promise<Response> 
 
 // Helper to safely parse and throw meaningful API errors for toast notifications
 async function handleResponse(res: Response, defaultErrorMsg: string) {
+  if (res.status === 401) {
+    if (typeof window !== 'undefined') {
+      window.location.href = '/admin/login';
+    }
+    throw new Error("Unauthorized. Please log in again.");
+  }
+
   const text = await res.text();
   if (!res.ok) {
     try {
@@ -58,8 +58,8 @@ async function handleResponse(res: Response, defaultErrorMsg: string) {
   }
 }
 
-export async function fetchAdminStats() {
-  const res = await apiFetch(`${API_BASE_URL}/admin/stats`, { 
+export async function fetchAdminStats(timeframe: string = "24h") {
+  const res = await apiFetch(`${API_BASE_URL}/admin/stats?timeframe=${timeframe}`, { 
     credentials: 'include', cache: 'no-store',
     headers: getAdminHeaders()
   });
@@ -246,11 +246,11 @@ export async function uploadAdminSupportImage(userId: number, chatId: number, im
   return handleResponse(res, "Failed to upload image");
 }
 
-export async function adminAddUserBalance(userId: number, amount: number, note: string) {
+export async function adminAddUserBalance(userId: number, amount: number, note: string, idempotencyKey: string) {
   const res = await apiFetch(`${API_BASE_URL}/admin/user/add-balance`, {
     method: 'POST',
     headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
-    body: JSON.stringify({ user_id: userId, amount, note }),
+    body: JSON.stringify({ user_id: userId, amount, note, idempotency_key: idempotencyKey }),
   });
   return handleResponse(res, "Failed to add balance");
 }

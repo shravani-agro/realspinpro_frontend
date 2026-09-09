@@ -32,9 +32,6 @@ export default function SettingsPage() {
         if (typeof data.promotions === 'string') {
           parsedSettings.promotions = JSON.parse(data.promotions);
         }
-        if (typeof data.promotions === 'string') {
-          parsedSettings.promotions = JSON.parse(data.promotions);
-        }
         setSettings((prev: any) => ({ ...prev, ...parsedSettings }));
       }
     } catch (err: any) {
