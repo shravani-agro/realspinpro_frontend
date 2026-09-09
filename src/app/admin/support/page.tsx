@@ -36,15 +36,20 @@ export default function SupportPage() {
     };
     loadChats();
 
-    // Setup WebSocket using the Next.js API Proxy which handles cross-site cookies
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host}/api-proxy/admin/support/ws`;
+    // We can't proxy WebSockets via Next.js on Netlify.
+    // We must fetch the token and connect directly to the backend.
+    const wsBaseUrl = process.env.NEXT_PUBLIC_WS_URL || 'wss://api.shravaniagro.store';
     
     let reconnectAttempts = 0;
     
-    const connectWS = () => {
-      // The backend AuthMiddleware will parse the token from HttpOnly cookie
-      const ws = new WebSocket(wsUrl);
+    const connectWS = async () => {
+      try {
+        const tokenRes = await fetch('/api/auth/token');
+        if (!tokenRes.ok) throw new Error('No token');
+        const { token } = await tokenRes.json();
+        
+        const wsUrl = `${wsBaseUrl}/admin/support/ws?token=${token}`;
+        const ws = new WebSocket(wsUrl);
       
       ws.onmessage = (event) => {
         try {
@@ -91,6 +96,10 @@ export default function SupportPage() {
       };
       
       wsRef.current = ws;
+      } catch (err) {
+        console.error('Failed to connect WS', err);
+        setTimeout(connectWS, 5000);
+      }
     };
     
     connectWS();
