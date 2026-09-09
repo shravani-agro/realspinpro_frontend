@@ -205,6 +205,23 @@ export async function fetchAdminAuditLogs() {
   return handleResponse(res, "Failed to fetch audit logs");
 }
 
+export async function updateAdminSupportChatStatus(userId: number, status: string) {
+  const res = await apiFetch(`${API_BASE_URL}/admin/support/chats/status`, {
+    method: 'PUT',
+    headers: getAdminHeaders({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({ user_id: userId, status }),
+  });
+  return handleResponse(res, "Failed to update chat status");
+}
+
+export async function deleteAdminSupportChat(userId: number) {
+  const res = await apiFetch(`${API_BASE_URL}/admin/support/chats/delete?user_id=${userId}`, {
+    method: 'DELETE',
+    headers: getAdminHeaders(),
+  });
+  return handleResponse(res, "Failed to delete chat");
+}
+
 export async function fetchAdminSupportChats() {
   const res = await apiFetch(`${API_BASE_URL}/admin/support/chats`, {
     credentials: 'include', cache: 'no-store',

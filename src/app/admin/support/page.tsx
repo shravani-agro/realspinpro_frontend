@@ -6,10 +6,12 @@ import {
   fetchAdminSupportHistory, 
   sendAdminSupportMessage, 
   uploadAdminSupportImage,
+  updateAdminSupportChatStatus,
+  deleteAdminSupportChat,
   API_BASE_URL,
   getAdminHeaders
 } from "@/lib/api";
-import { Send, Image as ImageIcon, CheckCircle, Clock, Search, Bot } from "lucide-react";
+import { Send, Image as ImageIcon, CheckCircle, Clock, Search, Bot, Trash2 } from "lucide-react";
 
 export default function SupportPage() {
   const [chats, setChats] = useState<any[]>([]);
@@ -165,6 +167,42 @@ export default function SupportPage() {
     }
   };
 
+  const handleStatusChange = async (newStatus: string) => {
+    if (!selectedUser) return;
+    try {
+      await updateAdminSupportChatStatus(selectedUser.user_id, newStatus);
+      
+      // Update local state for both the selected user and the chats list
+      setSelectedUser((prev: any) => ({ ...prev, status: newStatus }));
+      
+      setChats(prevChats => 
+        prevChats.map(c => c.id === selectedUser.id ? { ...c, status: newStatus } : c)
+      );
+      
+    } catch (error) {
+      alert("Failed to update status.");
+    }
+  };
+
+  const handleDeleteChat = async () => {
+    if (!selectedUser) return;
+    const confirmDelete = window.confirm("Are you sure you want to delete this chat? This will clear all messages for the user as well.");
+    if (!confirmDelete) return;
+
+    try {
+      await deleteAdminSupportChat(selectedUser.user_id);
+      
+      // Remove from chats list
+      setChats(prevChats => prevChats.filter(c => c.id !== selectedUser.id));
+      
+      // Clear selected user
+      setSelectedUser(null);
+      setMessages([]);
+    } catch (error) {
+      alert("Failed to delete chat.");
+    }
+  };
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !selectedUser) return;
@@ -256,7 +294,25 @@ export default function SupportPage() {
             <div className="p-4 border-b border-slate-200 bg-white flex justify-between items-center">
               <div>
                 <h3 className="font-bold text-lg text-slate-900">User ID: {selectedUser.user_id}</h3>
-                <span className="text-sm text-slate-500">Chat #{selectedUser.id} • {selectedUser.status}</span>
+                <span className="text-sm text-slate-500">Chat #{selectedUser.id}</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <select 
+                  value={selectedUser.status}
+                  onChange={(e) => handleStatusChange(e.target.value)}
+                  className="bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500 shadow-sm text-slate-700 font-medium"
+                >
+                  <option value="open">Open</option>
+                  <option value="closed">Closed</option>
+                  <option value="resolved">Resolved</option>
+                </select>
+                <button
+                  onClick={handleDeleteChat}
+                  title="Delete Chat"
+                  className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-200"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
               </div>
             </div>
             
