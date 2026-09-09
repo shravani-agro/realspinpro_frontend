@@ -81,6 +81,25 @@ export default function SupportPage() {
               loadChats();
               return prevChats;
             });
+          } else if (data.type === 'chat_status_updated') {
+            const payload = data.data;
+            if (!payload || !payload.user_id || !payload.status) return;
+            const userId = payload.user_id;
+            const newStatus = payload.status;
+            
+            setChats(prevChats => {
+              const updatedChats = prevChats.map(c => 
+                c.user_id === userId ? { ...c, status: newStatus } : c
+              );
+              return updatedChats;
+            });
+            
+            setSelectedUser((prev: any) => {
+              if (prev && prev.user_id === userId) {
+                return { ...prev, status: newStatus };
+              }
+              return prev;
+            });
           }
         } catch (e) {
           console.error("WS Parse error", e);
