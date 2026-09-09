@@ -28,41 +28,41 @@ export default function AuditLogsPage() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
-            <ClipboardList className="w-8 h-8 text-neon-blue" />
+          <h1 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+            <ClipboardList className="w-8 h-8 text-blue-600" />
             Audit Logs
           </h1>
-          <p className="text-gray-400 mt-1">Detailed history of admin actions</p>
+          <p className="text-slate-500 mt-1">Detailed history of admin actions</p>
         </div>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-xl">
-        <div className="p-4 border-b border-white/10 flex items-center justify-between bg-black/40">
-          <h2 className="font-medium text-white flex items-center gap-2">
-            <Info className="w-4 h-4 text-gray-400" />
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+        <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+          <h2 className="font-medium text-slate-900 flex items-center gap-2">
+            <Info className="w-4 h-4 text-slate-500" />
             Recent Activity
           </h2>
-          <span className="text-xs font-medium px-2.5 py-1 bg-white/10 text-gray-300 rounded-full">
+          <span className="text-xs font-medium px-2.5 py-1 bg-slate-200 text-slate-700 rounded-full">
             Top 100
           </span>
         </div>
         
         {loading ? (
           <div className="p-12 flex justify-center">
-            <Loader2 className="w-8 h-8 text-neon-blue animate-spin" />
+            <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
           </div>
         ) : error ? (
-          <div className="p-12 text-center text-red-400">
+          <div className="p-12 text-center text-red-600">
             {error}
           </div>
         ) : logs.length === 0 ? (
-          <div className="p-12 text-center text-gray-400">
+          <div className="p-12 text-center text-slate-500">
             No audit logs found.
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-gray-300">
-              <thead className="text-xs text-gray-400 uppercase bg-black/40 border-b border-white/10">
+            <table className="w-full text-left text-sm text-slate-600">
+              <thead className="text-xs text-slate-500 uppercase bg-slate-50 border-b border-slate-200">
                 <tr>
                   <th className="px-6 py-4">ID</th>
                   <th className="px-6 py-4">Admin</th>
@@ -71,28 +71,28 @@ export default function AuditLogsPage() {
                   <th className="px-6 py-4 text-right">Time</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-slate-200">
                 {logs.map((log) => (
-                  <tr key={log.id} className="hover:bg-white/5 transition-colors">
-                    <td className="px-6 py-4 font-mono text-xs text-gray-500">#{log.id}</td>
+                  <tr key={log.id} className="hover:bg-slate-50 transition-colors">
+                    <td className="px-6 py-4 font-mono text-xs text-slate-500">#{log.id}</td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <User className="w-4 h-4 text-neon-purple" />
-                        <span className="font-medium text-white">{log.admin_username}</span>
+                        <User className="w-4 h-4 text-purple-600" />
+                        <span className="font-medium text-slate-900">{log.admin_username}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className="px-2.5 py-1 rounded-md text-xs font-medium bg-neon-blue/10 text-neon-blue border border-neon-blue/20">
+                      <span className="px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
                         {log.action}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <pre className="text-[10px] font-mono text-gray-400 bg-black/40 p-2 rounded-lg max-w-xs overflow-x-auto">
+                      <pre className="text-[10px] font-mono text-slate-600 bg-slate-100 p-2 rounded-lg max-w-xs overflow-x-auto border border-slate-200">
                         {JSON.stringify(log.details, null, 2)}
                       </pre>
                     </td>
                     <td className="px-6 py-4 text-right whitespace-nowrap">
-                      <div className="flex items-center justify-end gap-1.5 text-gray-400">
+                      <div className="flex items-center justify-end gap-1.5 text-slate-500">
                         <Clock className="w-3.5 h-3.5" />
                         {new Date(log.created_at).toLocaleString("en-IN", {
                           day: "2-digit",

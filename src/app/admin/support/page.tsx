@@ -189,19 +189,19 @@ export default function SupportPage() {
   );
 
   return (
-    <div className="flex h-screen bg-black text-white pt-16 -mt-16">
+    <div className="flex h-[calc(100vh-4rem)] bg-slate-50 text-slate-900 border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
       {/* Left Pane: Chat List */}
-      <div className="w-1/3 border-r border-white/10 flex flex-col bg-gray-900/50">
-        <div className="p-4 border-b border-white/10">
-          <h2 className="text-xl font-bold mb-4">Support Chats</h2>
+      <div className="w-1/3 border-r border-slate-200 flex flex-col bg-white">
+        <div className="p-4 border-b border-slate-200 bg-slate-50">
+          <h2 className="text-xl font-bold mb-4 text-slate-900">Support Chats</h2>
           <div className="relative">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-500" />
+            <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
             <input
               type="text"
               placeholder="Search User ID..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-black/50 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-neon-blue transition-colors"
+              className="w-full bg-white border border-slate-300 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all shadow-sm"
             />
           </div>
         </div>
@@ -211,14 +211,14 @@ export default function SupportPage() {
             <div
               key={chat.id}
               onClick={() => setSelectedUser(chat)}
-              className={`p-4 border-b border-white/5 cursor-pointer transition-colors ${
+              className={`p-4 border-b border-slate-100 cursor-pointer transition-colors ${
                 selectedUser?.id === chat.id 
-                  ? "bg-neon-blue/10 border-l-4 border-l-neon-blue" 
-                  : "hover:bg-white/5 border-l-4 border-l-transparent"
+                  ? "bg-blue-50 border-l-4 border-l-blue-600" 
+                  : "hover:bg-slate-50 border-l-4 border-l-transparent"
               }`}
             >
               <div className="flex justify-between items-center mb-1">
-                <span className="font-semibold flex items-center gap-2">
+                <span className="font-semibold text-slate-900 flex items-center gap-2">
                   User ID: {chat.user_id}
                   {chat.unread_count > 0 && (
                     <span className="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full">
@@ -226,23 +226,23 @@ export default function SupportPage() {
                     </span>
                   )}
                 </span>
-                <span className={`text-xs px-2 py-0.5 rounded-full ${
-                  chat.status === 'open' ? 'bg-green-500/20 text-green-400' : 'bg-gray-500/20 text-gray-400'
+                <span className={`text-xs px-2.5 py-0.5 rounded-full font-medium ${
+                  chat.status === 'open' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-600'
                 }`}>
                   {chat.status}
                 </span>
               </div>
-              <div className="text-sm text-gray-300 truncate mb-1">
+              <div className="text-sm text-slate-600 truncate mb-1">
                 {chat.last_message || "No messages yet"}
               </div>
-              <div className="flex justify-between items-center text-xs text-gray-500">
+              <div className="flex justify-between items-center text-xs text-slate-400">
                 <span>Chat #{chat.id}</span>
                 <span>{chat.last_message_time ? new Date(chat.last_message_time).toLocaleDateString() : new Date(chat.updated_at).toLocaleDateString()}</span>
               </div>
             </div>
           ))}
           {filteredChats.length === 0 && (
-            <div className="p-8 text-center text-gray-500">
+            <div className="p-8 text-center text-slate-500">
               No chats found.
             </div>
           )}
@@ -250,13 +250,13 @@ export default function SupportPage() {
       </div>
 
       {/* Right Pane: Chat Window */}
-      <div className="flex-1 flex flex-col bg-black">
+      <div className="flex-1 flex flex-col bg-slate-50">
         {selectedUser ? (
           <>
-            <div className="p-4 border-b border-white/10 bg-gray-900/50 flex justify-between items-center">
+            <div className="p-4 border-b border-slate-200 bg-white flex justify-between items-center">
               <div>
-                <h3 className="font-bold text-lg">User ID: {selectedUser.user_id}</h3>
-                <span className="text-sm text-gray-400">Chat #{selectedUser.id} • {selectedUser.status}</span>
+                <h3 className="font-bold text-lg text-slate-900">User ID: {selectedUser.user_id}</h3>
+                <span className="text-sm text-slate-500">Chat #{selectedUser.id} • {selectedUser.status}</span>
               </div>
             </div>
             
@@ -267,10 +267,10 @@ export default function SupportPage() {
                 
                 return (
                   <div key={msg.id || idx} className={`flex ${isAdmin ? 'justify-end' : 'justify-start'}`}>
-                    <div className={`max-w-[70%] rounded-2xl p-3 ${
+                    <div className={`max-w-[70%] rounded-2xl p-3 shadow-sm ${
                       isAdmin 
-                        ? 'bg-neon-blue/20 text-white rounded-br-none border border-neon-blue/30' 
-                        : 'bg-white/10 text-white rounded-bl-none border border-white/10'
+                        ? 'bg-blue-600 text-white rounded-br-none border border-blue-700' 
+                        : 'bg-white text-slate-900 rounded-bl-none border border-slate-200'
                     }`}>
                       {msg.message_type === 'text' ? (
                         <p className="whitespace-pre-wrap text-sm">{msg.content}</p>
@@ -281,12 +281,12 @@ export default function SupportPage() {
                             alt="Attachment" 
                             className="rounded-lg max-h-60 object-contain mb-2 cursor-pointer"
                             onError={(e) => {
-                              (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23333"/><text x="50" y="50" fill="%23999" text-anchor="middle" alignment-baseline="middle">Broken Image</text></svg>';
+                              (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23e2e8f0"/><text x="50" y="50" fill="%2364748b" text-anchor="middle" alignment-baseline="middle">Broken Image</text></svg>';
                             }}
                           />
                         </a>
                       )}
-                      <div className={`text-[10px] mt-1 ${isAdmin ? 'text-neon-blue/60 text-right' : 'text-gray-400'}`}>
+                      <div className={`text-[10px] mt-1 ${isAdmin ? 'text-blue-100 text-right' : 'text-slate-400'}`}>
                         {time}
                       </div>
                     </div>
@@ -296,7 +296,7 @@ export default function SupportPage() {
               <div ref={messagesEndRef} />
             </div>
             
-            <div className="p-4 border-t border-white/10 bg-gray-900/50">
+            <div className="p-4 border-t border-slate-200 bg-white">
               <form onSubmit={handleSendMessage} className="flex gap-2">
                 <input
                   type="file"
@@ -309,7 +309,7 @@ export default function SupportPage() {
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={isUploading}
-                  className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors text-gray-400 hover:text-white disabled:opacity-50"
+                  className="p-3 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl transition-colors text-slate-500 hover:text-slate-900 shadow-sm disabled:opacity-50"
                 >
                   {isUploading ? <Clock className="w-5 h-5 animate-spin" /> : <ImageIcon className="w-5 h-5" />}
                 </button>
@@ -318,12 +318,12 @@ export default function SupportPage() {
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   placeholder="Type a message..."
-                  className="flex-1 bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-neon-blue transition-colors"
+                  className="flex-1 bg-white border border-slate-300 shadow-sm rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-colors"
                 />
                 <button
                   type="submit"
                   disabled={!inputMessage.trim() || isSending}
-                  className="px-6 py-2 bg-neon-blue hover:bg-neon-blue/80 text-black font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm"
                 >
                   <Send className="w-4 h-4" />
                   <span>Send</span>
@@ -332,7 +332,7 @@ export default function SupportPage() {
             </div>
           </>
         ) : (
-          <div className="flex-1 flex flex-col items-center justify-center text-gray-500">
+          <div className="flex-1 flex flex-col items-center justify-center text-slate-500">
             <Bot className="w-16 h-16 mb-4 opacity-50" />
             <p>Select a user to start chatting</p>
           </div>

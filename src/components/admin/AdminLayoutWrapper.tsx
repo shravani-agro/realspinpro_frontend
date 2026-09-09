@@ -38,8 +38,8 @@ export function AdminLayoutWrapper({ children }: { children: React.ReactNode }) 
   // If on login page, just render children without sidebar/navbar
   if (isLoginPage) {
     return (
-      <div className="min-h-screen bg-[#050505] flex">
-        <div className="fixed inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+      <div className="min-h-screen bg-slate-50 text-slate-900 flex font-sans [&_h1]:font-sans [&_h2]:font-sans [&_h3]:font-sans [&_h4]:font-sans [&_h5]:font-sans [&_h6]:font-sans">
+        <div className="fixed inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
         {children}
       </div>
     );
@@ -47,16 +47,16 @@ export function AdminLayoutWrapper({ children }: { children: React.ReactNode }) 
 
   if (!isAuthenticated && isVerifying) {
     return (
-      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
-        <div className="w-8 h-8 rounded-full border-t-2 border-r-2 border-neon-blue animate-spin" />
+      <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center font-sans">
+        <div className="w-8 h-8 rounded-full border-t-2 border-r-2 border-blue-600 animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] flex">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex font-sans [&_h1]:font-sans [&_h2]:font-sans [&_h3]:font-sans [&_h4]:font-sans [&_h5]:font-sans [&_h6]:font-sans">
       {/* Background Grid */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+      <div className="fixed inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
       {/* Mobile Overlay */}
       {isMobileMenuOpen && (

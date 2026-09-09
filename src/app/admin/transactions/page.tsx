@@ -61,23 +61,23 @@ export default function TransactionsPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">Transactions</h1>
-          <p className="text-gray-400">Manage user deposits and withdrawal requests.</p>
+          <h1 className="text-3xl font-bold text-slate-900 mb-2">Transactions</h1>
+          <p className="text-slate-500">Manage user deposits and withdrawal requests.</p>
         </div>
         <div className="flex gap-3">
-          <button onClick={loadData} className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white font-medium flex items-center gap-2 transition-colors">
+          <button onClick={loadData} className="px-4 py-2 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl text-slate-700 font-medium flex items-center gap-2 transition-colors shadow-sm">
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} /> Refresh
           </button>
         </div>
       </div>
 
-      <div className="glass-panel p-4 rounded-2xl border border-white/5 flex flex-col md:flex-row gap-4">
+      <div className="bg-white border border-slate-200 shadow-sm p-4 rounded-2xl flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
           <input
             type="text"
             placeholder="Search TX ID or User..."
-            className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 pl-10 pr-4 text-white focus:outline-none focus:border-neon-blue/50 transition-colors"
+            className="w-full bg-white border border-slate-300 rounded-xl py-2.5 pl-10 pr-4 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-all shadow-sm"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -88,8 +88,8 @@ export default function TransactionsPage() {
               key={type}
               onClick={() => setTypeFilter(type)}
               className={`px-4 py-2.5 rounded-xl text-sm font-semibold capitalize transition-colors ${typeFilter === type
-                ? "bg-white/10 text-white border border-white/20"
-                : "bg-transparent text-gray-400 border border-transparent hover:bg-white/5"
+                ? "bg-slate-100 text-slate-900 border border-slate-200 shadow-sm"
+                : "bg-transparent text-slate-500 border border-transparent hover:bg-slate-50"
                 }`}
             >
               {type}s
@@ -99,87 +99,87 @@ export default function TransactionsPage() {
       </div>
 
       <div className="flex gap-4 mb-4">
-        <div className="flex flex-col gap-1 text-sm text-gray-400">
+        <div className="flex flex-col gap-1 text-sm text-slate-500">
           <label>Start Date</label>
           <input
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-neon-blue/50"
+            className="bg-white border border-slate-300 shadow-sm rounded-xl px-4 py-2 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20"
           />
         </div>
-        <div className="flex flex-col gap-1 text-sm text-gray-400">
+        <div className="flex flex-col gap-1 text-sm text-slate-500">
           <label>End Date</label>
           <input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            className="bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-neon-blue/50"
+            className="bg-white border border-slate-300 shadow-sm rounded-xl px-4 py-2 text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20"
           />
         </div>
         <div className="flex items-end pb-1">
           <button
             onClick={() => { setStartDate(""); setEndDate(""); }}
-            className="text-red-400 hover:text-red-300 px-2 py-1 text-sm"
+            className="text-red-500 hover:text-red-700 px-2 py-1 text-sm transition-colors"
           >
             Clear Dates
           </button>
         </div>
       </div>
 
-      <div className="glass-panel rounded-2xl border border-white/5 overflow-hidden">
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           {loading && transactions.length === 0 ? (
-            <div className="p-8 text-center text-gray-400">Loading transactions...</div>
+            <div className="p-8 text-center text-slate-500">Loading transactions...</div>
           ) : (
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-white/5 bg-white/5">
-                  <th className="p-4 text-sm font-semibold text-gray-400">Type</th>
-                  <th className="p-4 text-sm font-semibold text-gray-400">TX ID</th>
-                  <th className="p-4 text-sm font-semibold text-gray-400">User</th>
-                  <th className="p-4 text-sm font-semibold text-gray-400">Amount</th>
-                  <th className="p-4 text-sm font-semibold text-gray-400">Status</th>
-                  <th className="p-4 text-sm font-semibold text-gray-400">Date</th>
-                  <th className="p-4 text-sm font-semibold text-gray-400 text-right">Actions</th>
+                <tr className="border-b border-slate-200 bg-slate-50">
+                  <th className="p-4 text-sm font-semibold text-slate-600">Type</th>
+                  <th className="p-4 text-sm font-semibold text-slate-600">TX ID</th>
+                  <th className="p-4 text-sm font-semibold text-slate-600">User</th>
+                  <th className="p-4 text-sm font-semibold text-slate-600">Amount</th>
+                  <th className="p-4 text-sm font-semibold text-slate-600">Status</th>
+                  <th className="p-4 text-sm font-semibold text-slate-600">Date</th>
+                  <th className="p-4 text-sm font-semibold text-slate-600 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-slate-200">
                 {filteredTx.map((tx) => (
-                  <tr key={tx.id} className="hover:bg-white/[0.02] transition-colors">
+                  <tr key={tx.id} className="hover:bg-slate-50 transition-colors">
                     <td className="p-4">
                       {tx.type === "deposit" ? (
-                        <div className="flex items-center gap-2 text-neon-emerald">
-                          <div className="w-8 h-8 rounded-full bg-neon-emerald/10 flex items-center justify-center">
+                        <div className="flex items-center gap-2 text-emerald-700">
+                          <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center">
                             <ArrowDownLeft className="w-4 h-4" />
                           </div>
                           <span className="font-semibold capitalize">Deposit</span>
                         </div>
                       ) : (
                         <>
-                          <div className="flex items-center gap-2 text-neon-purple">
-                            <div className="w-8 h-8 rounded-full bg-neon-purple/10 flex items-center justify-center">
+                          <div className="flex items-center gap-2 text-purple-700">
+                            <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center">
                               <ArrowUpRight className="w-4 h-4" />
                             </div>
                             <span className="font-semibold capitalize">Withdrawal</span>
                           </div>
                           {tx.type === "withdrawal" && tx.upi_id && (
-                            <div className="mt-2 text-xs text-neon-purple/70 font-mono bg-neon-purple/5 px-2 py-1 rounded">
+                            <div className="mt-2 text-xs text-purple-600 font-mono bg-slate-100 px-2 py-1 rounded border border-slate-200">
                               UPI: {tx.upi_id}
                             </div>
                           )}
                         </>
                       )}
                     </td>
-                    <td className="p-4 font-mono text-sm text-gray-400">#{tx.id}</td>
-                    <td className="p-4 font-medium text-white">{tx.username || "Anonymous"}</td>
-                    <td className="p-4 font-bold text-white">₹{Math.abs(tx.amount)}</td>
+                    <td className="p-4 font-mono text-sm text-slate-500">#{tx.id}</td>
+                    <td className="p-4 font-medium text-slate-900">{tx.username || "Anonymous"}</td>
+                    <td className="p-4 font-bold text-slate-900">₹{Math.abs(tx.amount)}</td>
                     <td className="p-4">
-                      {tx.status === "success" && <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-neon-emerald/10 text-neon-emerald text-xs font-bold border border-neon-emerald/20"><CheckCircle className="w-3 h-3" /> Success</span>}
-                      {tx.status === "failed" && <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/10 text-red-500 text-xs font-bold border border-red-500/20"><XCircle className="w-3 h-3" /> Failed</span>}
-                      {tx.status === "pending" && <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-yellow-500/10 text-yellow-500 text-xs font-bold border border-yellow-500/20"><RefreshCw className="w-3 h-3 animate-spin" /> Pending</span>}
+                      {tx.status === "success" && <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200"><CheckCircle className="w-3 h-3" /> Success</span>}
+                      {tx.status === "failed" && <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-50 text-red-600 text-xs font-bold border border-red-200"><XCircle className="w-3 h-3" /> Failed</span>}
+                      {tx.status === "pending" && <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-yellow-50 text-yellow-600 text-xs font-bold border border-yellow-200"><RefreshCw className="w-3 h-3 animate-spin" /> Pending</span>}
                     </td>
-                    <td className="p-4 text-gray-500 text-sm">
+                    <td className="p-4 text-slate-500 text-sm">
                       {formatIST(tx.created_at)}
                     </td>
                     <td className="p-4 text-right">
@@ -189,7 +189,7 @@ export default function TransactionsPage() {
                             <button
                               disabled={processingId === tx.id}
                               onClick={() => handleUpdateStatus(tx.id, "success")}
-                              className="p-2 bg-neon-emerald/10 hover:bg-neon-emerald/20 text-neon-emerald rounded-lg transition-colors border border-neon-emerald/20 disabled:opacity-50"
+                              className="p-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg transition-colors border border-emerald-200 disabled:opacity-50"
                               title="Approve & Send via Cashfree"
                             >
                               {processingId === tx.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <CheckCircle className="w-4 h-4" />}
@@ -197,7 +197,7 @@ export default function TransactionsPage() {
                             <button
                               disabled={processingId === tx.id}
                               onClick={() => handleUpdateStatus(tx.id, "failed")}
-                              className="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg transition-colors border border-red-500/20 disabled:opacity-50"
+                              className="p-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-colors border border-red-200 disabled:opacity-50"
                               title="Reject & Refund"
                             >
                               {processingId === tx.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <XCircle className="w-4 h-4" />}
@@ -205,11 +205,11 @@ export default function TransactionsPage() {
                           </div>
                         ) : (
                           <div className="flex justify-end gap-2">
-                            <span className="text-xs text-gray-500 italic mr-2">Auto-verifying via Cashfree</span>
+                            <span className="text-xs text-slate-500 italic mr-2">Auto-verifying via Cashfree</span>
                             <button
                               disabled={processingId === tx.id}
                               onClick={() => handleUpdateStatus(tx.id, "failed")}
-                              className="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg transition-colors border border-red-500/20 disabled:opacity-50"
+                              className="p-2 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg transition-colors border border-red-200 disabled:opacity-50"
                               title="Cancel Deposit"
                             >
                               {processingId === tx.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <XCircle className="w-4 h-4" />}
@@ -217,14 +217,14 @@ export default function TransactionsPage() {
                           </div>
                         )
                       ) : (
-                        <span className="text-gray-600 text-sm italic">Processed</span>
+                        <span className="text-slate-400 text-sm italic">Processed</span>
                       )}
                     </td>
                   </tr>
                 ))}
                 {filteredTx.length === 0 && !loading && (
                   <tr>
-                    <td colSpan={7} className="text-center py-8 text-gray-500">No transactions found</td>
+                    <td colSpan={7} className="text-center py-8 text-slate-500">No transactions found</td>
                   </tr>
                 )}
               </tbody>

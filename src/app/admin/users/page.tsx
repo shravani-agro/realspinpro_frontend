@@ -28,31 +28,31 @@ export default function UsersPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-white tracking-tight">User Management</h1>
+        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">User Management</h1>
         <div className="flex gap-4">
           <div className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             <input 
               type="text" 
               placeholder="Search users..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9 pr-4 py-2 rounded-lg bg-black/50 border border-white/10 text-sm focus:outline-none focus:border-neon-blue/50 text-white w-64" 
+              className="pl-9 pr-4 py-2 rounded-lg bg-white border border-slate-300 shadow-sm text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 text-slate-900 w-64" 
             />
           </div>
-          <button onClick={() => toast.info("Advanced filters coming soon!")} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-black/50 border border-white/10 text-sm text-gray-300 hover:text-white transition-colors">
+          <button onClick={() => toast.info("Advanced filters coming soon!")} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-slate-300 shadow-sm text-sm text-slate-600 hover:text-slate-900 transition-colors">
             <Filter className="w-4 h-4" /> Filters
           </button>
         </div>
       </div>
 
-      <div className="glass-panel rounded-xl overflow-hidden">
+      <div className="bg-white border border-slate-200 shadow-sm rounded-xl overflow-hidden">
         <div className="overflow-x-auto">
           {loading ? (
-            <div className="p-8 text-center text-gray-400">Loading users...</div>
+            <div className="p-8 text-center text-slate-500">Loading users...</div>
           ) : (
-            <table className="w-full text-left text-sm text-gray-400">
-              <thead className="bg-white/5 border-b border-white/10 text-gray-300 uppercase font-semibold text-xs">
+            <table className="w-full text-left text-sm text-slate-600">
+              <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 uppercase font-semibold text-xs">
                 <tr>
                   <th className="px-6 py-4">User ID</th>
                   <th className="px-6 py-4">Username / Mobile</th>
@@ -64,23 +64,23 @@ export default function UsersPage() {
                   <th className="px-6 py-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-slate-200">
                 {users.filter(u => 
                   (u.username && u.username.toLowerCase().includes(searchTerm.toLowerCase())) || 
                   (u.mobile && u.mobile.includes(searchTerm)) || 
                   (u.email && u.email.toLowerCase().includes(searchTerm.toLowerCase()))
                 ).map((user) => (
-                  <tr key={user.id} className="hover:bg-white/[0.02] transition-colors group">
-                    <td className="px-6 py-4 font-mono text-gray-500">#{user.id}</td>
+                  <tr key={user.id} className="hover:bg-slate-50 transition-colors group">
+                    <td className="px-6 py-4 font-mono text-slate-500">#{user.id}</td>
                     <td className="px-6 py-4">
-                      <div className="font-medium text-white">{user.username || "Anonymous"}</div>
-                      <div className="text-xs text-gray-500">{user.mobile}</div>
+                      <div className="font-medium text-slate-900">{user.username || "Anonymous"}</div>
+                      <div className="text-xs text-slate-500">{user.mobile}</div>
                     </td>
-                    <td className="px-6 py-4 font-mono font-bold text-white tracking-widest">***</td>
-                    <td className="px-6 py-4 text-gray-400">{user.email || "-"}</td>
-                    <td className="px-6 py-4 font-mono text-neon-blue group-hover:drop-shadow-[0_0_5px_var(--color-neon-blue)] transition-all">₹{user.balance_cached}</td>
+                    <td className="px-6 py-4 font-mono font-bold text-slate-400 tracking-widest">***</td>
+                    <td className="px-6 py-4 text-slate-500">{user.email || "-"}</td>
+                    <td className="px-6 py-4 font-mono text-blue-600 font-medium">₹{user.balance_cached}</td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-bold ${!user.is_blocked ? 'text-neon-emerald bg-neon-emerald/10' : 'text-red-500 bg-red-500/10'}`}>
+                      <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${!user.is_blocked ? 'text-emerald-700 bg-emerald-50' : 'text-red-700 bg-red-50'}`}>
                         {!user.is_blocked ? (
                           <>Active</>
                         ) : (
@@ -88,11 +88,11 @@ export default function UsersPage() {
                         )}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-gray-500">
+                    <td className="px-6 py-4 text-slate-500">
                       {formatIST(user.created_at)}
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <Link href={`/admin/users/${user.id}`} className="p-2 inline-block text-gray-500 hover:text-white transition-colors">
+                      <Link href={`/admin/users/${user.id}`} className="p-2 inline-block text-slate-400 hover:text-blue-600 transition-colors">
                         <Eye className="w-5 h-5" />
                       </Link>
                     </td>
@@ -100,7 +100,7 @@ export default function UsersPage() {
                 ))}
                 {users.length === 0 && (
                   <tr>
-                    <td colSpan={8} className="text-center py-8 text-gray-500">No users found</td>
+                    <td colSpan={8} className="text-center py-8 text-slate-500">No users found</td>
                   </tr>
                 )}
               </tbody>

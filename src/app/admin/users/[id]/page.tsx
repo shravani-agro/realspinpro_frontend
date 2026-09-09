@@ -76,30 +76,30 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
     }
   }, [user, address]);
 
-  if (loading) return <div className="p-8 text-center text-gray-400">Loading user details...</div>;
-  if (!user) return <div className="p-8 text-center text-red-400">User not found</div>;
+  if (loading) return <div className="p-8 text-center text-slate-500">Loading user details...</div>;
+  if (!user) return <div className="p-8 text-center text-red-600">User not found</div>;
 
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4 mb-8">
-        <Link href="/admin/users" className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white transition-colors">
+        <Link href="/admin/users" className="p-2 rounded-lg bg-white border border-slate-300 shadow-sm hover:bg-slate-50 text-slate-500 hover:text-slate-900 transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">User #{user.id}</h1>
-          <p className="text-sm text-gray-400">Joined {formatIST(user.created_at)}</p>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">User #{user.id}</h1>
+          <p className="text-sm text-slate-500">Joined {formatIST(user.created_at)}</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Admin Actions */}
-        <div className="glass-panel p-6 rounded-xl space-y-4 md:col-span-2 border border-red-500/20 bg-red-500/5">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <ShieldAlert className="w-5 h-5 text-red-500" /> Admin Management Actions
+        <div className="bg-red-50 p-6 rounded-xl space-y-4 md:col-span-2 border border-red-200 shadow-sm">
+          <h3 className="text-lg font-semibold text-red-900 mb-4 flex items-center gap-2">
+            <ShieldAlert className="w-5 h-5 text-red-600" /> Admin Management Actions
           </h3>
           <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
             <div className="flex-1">
-              <p className="text-sm text-gray-400 mb-2">Block or unblock this user account immediately.</p>
+              <p className="text-sm text-red-700 mb-2">Block or unblock this user account immediately.</p>
               <button 
                 disabled={isBlocking}
                 onClick={async () => {
@@ -115,20 +115,20 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                     setIsBlocking(false);
                   }
                 }}
-                className={`px-6 py-2.5 rounded-lg font-bold transition-all flex items-center gap-2 ${user.is_blocked ? 'bg-red-500 text-white shadow-[0_0_15px_rgba(239,68,68,0.4)]' : 'bg-white/10 hover:bg-red-500/20 hover:text-red-500 text-white'} disabled:opacity-50`}
+                className={`px-6 py-2.5 rounded-lg font-bold transition-all flex items-center gap-2 ${user.is_blocked ? 'bg-red-600 text-white shadow-sm hover:bg-red-700' : 'bg-white hover:bg-red-100 hover:text-red-700 text-red-600 border border-red-200'} disabled:opacity-50`}
               >
                 {isBlocking && <Loader2 className="w-4 h-4 animate-spin" />}
                 {user.is_blocked ? "ACCOUNT BLOCKED (Click to Unblock)" : "BLOCK ACCOUNT"}
               </button>
             </div>
             <div className="flex-1 w-full sm:w-auto">
-               <p className="text-sm text-gray-400 mb-2">Update User Custom Limit</p>
+               <p className="text-sm text-red-700 mb-2">Update User Custom Limit</p>
                <div className="flex gap-2">
                  <input 
                    type="number" 
                    value={limitInput}
                    onChange={(e) => setLimitInput(e.target.value)}
-                   className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white flex-1"
+                   className="bg-white border border-red-200 rounded-lg px-4 py-2 text-slate-900 flex-1 focus:outline-none focus:ring-2 focus:ring-red-500/20"
                    placeholder="Enter new limit"
                  />
                  <button 
@@ -147,7 +147,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                        setIsSavingLimit(false);
                      }
                    }}
-                   className="px-4 py-2 bg-neon-blue/20 text-neon-blue font-bold rounded-lg hover:bg-neon-blue/30 transition-colors flex items-center gap-2 disabled:opacity-50"
+                   className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2 disabled:opacity-50 shadow-sm"
                  >
                    {isSavingLimit && <Loader2 className="w-4 h-4 animate-spin" />}
                    Save Limit
@@ -157,11 +157,11 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
           </div>
 
           {/* Add Money Section */}
-          <div className="border-t border-white/10 pt-5 mt-2">
-            <p className="text-sm font-semibold text-neon-emerald mb-3 flex items-center gap-2">
+          <div className="border-t border-red-200 pt-5 mt-2">
+            <p className="text-sm font-semibold text-emerald-700 mb-3 flex items-center gap-2">
               <PlusCircle className="w-4 h-4" /> Add Money to Wallet
             </p>
-            <p className="text-xs text-gray-500 mb-3">
+            <p className="text-xs text-red-700 mb-3">
               Use this after you have manually sent money to the user via UPI / phone transfer. This will credit the entered amount directly to their in-app wallet.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
@@ -171,7 +171,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                 min="1"
                 value={addMoneyAmount}
                 onChange={(e) => setAddMoneyAmount(e.target.value)}
-                className="bg-white/5 border border-neon-emerald/30 focus:border-neon-emerald rounded-lg px-4 py-2 text-white w-full sm:w-40 focus:outline-none transition-colors"
+                className="bg-white border border-emerald-300 focus:border-emerald-500 rounded-lg px-4 py-2 text-slate-900 w-full sm:w-40 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-colors"
                 placeholder="Amount (₹)"
               />
               <input
@@ -179,7 +179,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                 type="text"
                 value={addMoneyNote}
                 onChange={(e) => setAddMoneyNote(e.target.value)}
-                className="bg-white/5 border border-white/10 focus:border-neon-emerald/50 rounded-lg px-4 py-2 text-white flex-1 focus:outline-none transition-colors"
+                className="bg-white border border-slate-300 focus:border-emerald-500 rounded-lg px-4 py-2 text-slate-900 flex-1 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-colors"
                 placeholder="Note (optional, e.g. UPI payment reference)"
               />
               <button
@@ -202,7 +202,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                     setIsAddingMoney(false);
                   }
                 }}
-                className="px-5 py-2 bg-neon-emerald/20 text-neon-emerald font-bold rounded-lg hover:bg-neon-emerald/30 transition-colors flex items-center gap-2 disabled:opacity-50 whitespace-nowrap border border-neon-emerald/30"
+                className="px-5 py-2 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700 transition-colors flex items-center gap-2 disabled:opacity-50 whitespace-nowrap shadow-sm"
               >
                 {isAddingMoney ? <Loader2 className="w-4 h-4 animate-spin" /> : <PlusCircle className="w-4 h-4" />}
                 Add Money
@@ -214,36 +214,36 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
 
         {/* Financial Summary (PnL) */}
         {user.financials && (
-          <div className="glass-panel p-6 rounded-xl space-y-6 md:col-span-2 border border-white/10">
-            <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-              <Wallet className="w-6 h-6 text-neon-emerald" /> Lifetime Financial Summary
+          <div className="bg-white p-6 rounded-xl space-y-6 md:col-span-2 border border-slate-200 shadow-sm">
+            <h3 className="text-xl font-bold text-slate-900 mb-2 flex items-center gap-2">
+              <Wallet className="w-6 h-6 text-emerald-600" /> Lifetime Financial Summary
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="bg-white/5 p-4 rounded-xl border border-white/5">
-                <div className="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">Total Deposits</div>
-                <div className="text-lg font-black text-neon-emerald">₹{(user.financials.total_deposits || 0).toLocaleString()}</div>
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-1">Total Deposits</div>
+                <div className="text-lg font-black text-emerald-600">₹{(user.financials.total_deposits || 0).toLocaleString()}</div>
               </div>
-              <div className="bg-white/5 p-4 rounded-xl border border-white/5">
-                <div className="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">Total Withdrawals</div>
-                <div className="text-lg font-black text-neon-purple">₹{(user.financials.total_withdrawals || 0).toLocaleString()}</div>
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-1">Total Withdrawals</div>
+                <div className="text-lg font-black text-purple-600">₹{(user.financials.total_withdrawals || 0).toLocaleString()}</div>
               </div>
-              <div className="bg-white/5 p-4 rounded-xl border border-white/5">
-                <div className="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">Lifetime Bets</div>
-                <div className="text-lg font-black text-neon-blue">₹{(user.financials.lifetime_bets || 0).toLocaleString()}</div>
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-1">Lifetime Bets</div>
+                <div className="text-lg font-black text-blue-600">₹{(user.financials.lifetime_bets || 0).toLocaleString()}</div>
               </div>
-              <div className="bg-white/5 p-4 rounded-xl border border-white/5">
-                <div className="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">Lifetime Wins</div>
-                <div className="text-lg font-black text-neon-emerald">₹{(user.financials.lifetime_payouts || 0).toLocaleString()}</div>
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div className="text-xs text-slate-500 uppercase font-bold tracking-wider mb-1">Lifetime Wins</div>
+                <div className="text-lg font-black text-emerald-600">₹{(user.financials.lifetime_payouts || 0).toLocaleString()}</div>
               </div>
               
-              <div className={`p-4 rounded-xl border relative overflow-hidden ${user.financials.net_profit > 0 ? 'bg-neon-emerald/10 border-neon-emerald/30' : user.financials.net_profit < 0 ? 'bg-red-500/10 border-red-500/30' : 'bg-white/5 border-white/10'}`}>
-                <div className="text-xs uppercase font-bold tracking-wider mb-1 z-10 relative text-gray-300">
+              <div className={`p-4 rounded-xl border relative overflow-hidden ${user.financials.net_profit > 0 ? 'bg-emerald-50 border-emerald-200' : user.financials.net_profit < 0 ? 'bg-red-50 border-red-200' : 'bg-slate-50 border-slate-200'}`}>
+                <div className="text-xs uppercase font-bold tracking-wider mb-1 z-10 relative text-slate-600">
                   Net Profit
                 </div>
-                <div className={`text-xl font-black z-10 relative ${user.financials.net_profit > 0 ? 'text-neon-emerald' : user.financials.net_profit < 0 ? 'text-red-500' : 'text-white'}`}>
+                <div className={`text-xl font-black z-10 relative ${user.financials.net_profit > 0 ? 'text-emerald-700' : user.financials.net_profit < 0 ? 'text-red-700' : 'text-slate-900'}`}>
                   {user.financials.net_profit > 0 ? '+' : ''}₹{(user.financials.net_profit || 0).toLocaleString()}
                 </div>
-                <div className="text-[10px] text-gray-400 mt-1 z-10 relative">
+                <div className="text-[10px] text-slate-500 mt-1 z-10 relative">
                   {user.financials.net_profit > 0 ? "User is beating the house" : user.financials.net_profit < 0 ? "House is profiting off user" : "Break Even"}
                 </div>
               </div>
@@ -252,108 +252,108 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
         )}
 
         {/* Basic Info */}
-        <div className="glass-panel p-6 rounded-xl space-y-4">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <User className="w-5 h-5 text-neon-blue" /> Basic Information
+        <div className="bg-white p-6 rounded-xl space-y-4 border border-slate-200 shadow-sm">
+          <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <User className="w-5 h-5 text-blue-600" /> Basic Information
           </h3>
           <div className="space-y-3 text-sm">
-            <div className="flex justify-between border-b border-white/5 pb-2">
-              <span className="text-gray-400">Username</span>
-              <span className="text-white font-medium">{user.username || "Not set"}</span>
+            <div className="flex justify-between border-b border-slate-100 pb-2">
+              <span className="text-slate-500">Username</span>
+              <span className="text-slate-900 font-medium">{user.username || "Not set"}</span>
             </div>
-            <div className="flex justify-between border-b border-white/5 pb-2">
-              <span className="text-gray-400">Mobile</span>
-              <span className="text-white font-medium">{user.mobile ? user.mobile.replace(/.(?=.{4})/g, '*') : "-"}</span>
+            <div className="flex justify-between border-b border-slate-100 pb-2">
+              <span className="text-slate-500">Mobile</span>
+              <span className="text-slate-900 font-medium">{user.mobile ? user.mobile.replace(/.(?=.{4})/g, '*') : "-"}</span>
             </div>
-            <div className="flex justify-between border-b border-white/5 pb-2">
-              <span className="text-gray-400">Email</span>
-              <span className="text-white font-medium">{user.email || "Not set"}</span>
+            <div className="flex justify-between border-b border-slate-100 pb-2">
+              <span className="text-slate-500">Email</span>
+              <span className="text-slate-900 font-medium">{user.email || "Not set"}</span>
             </div>
-            <div className="flex justify-between border-b border-white/5 pb-2">
-              <span className="text-gray-400">Status</span>
-              <span className={user.is_blocked ? "text-red-500 font-bold" : "text-neon-emerald font-bold"}>
+            <div className="flex justify-between border-b border-slate-100 pb-2">
+              <span className="text-slate-500">Status</span>
+              <span className={user.is_blocked ? "text-red-600 font-bold" : "text-emerald-600 font-bold"}>
                 {user.is_blocked ? "Banned" : "Active"}
               </span>
             </div>
             <div className="flex justify-between pt-2">
-              <span className="text-gray-400">Wallet Balance</span>
-              <span className="text-neon-blue font-bold text-lg">₹{user.balance_cached}</span>
+              <span className="text-slate-500">Wallet Balance</span>
+              <span className="text-blue-600 font-bold text-lg">₹{user.balance_cached}</span>
             </div>
           </div>
         </div>
 
         {/* Bank Details */}
-        <div className="glass-panel p-6 rounded-xl space-y-4">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <Building2 className="w-5 h-5 text-neon-purple" /> Bank Details
+        <div className="bg-white p-6 rounded-xl space-y-4 border border-slate-200 shadow-sm">
+          <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <Building2 className="w-5 h-5 text-purple-600" /> Bank Details
           </h3>
           {user.bank_details ? (
             <div className="space-y-3 text-sm">
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-gray-400">Bank Name</span>
-                <span className="text-white font-medium">{user.bank_details.bank_name || "-"}</span>
+              <div className="flex justify-between border-b border-slate-100 pb-2">
+                <span className="text-slate-500">Bank Name</span>
+                <span className="text-slate-900 font-medium">{user.bank_details.bank_name || "-"}</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-gray-400">Account Holder</span>
-                <span className="text-white font-medium">{user.bank_details.account_holder_name || "-"}</span>
+              <div className="flex justify-between border-b border-slate-100 pb-2">
+                <span className="text-slate-500">Account Holder</span>
+                <span className="text-slate-900 font-medium">{user.bank_details.account_holder_name || "-"}</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-gray-400">Account No.</span>
-                <span className="text-white font-mono">{user.bank_details.account_number ? user.bank_details.account_number.replace(/.(?=.{4})/g, '*') : "-"}</span>
+              <div className="flex justify-between border-b border-slate-100 pb-2">
+                <span className="text-slate-500">Account No.</span>
+                <span className="text-slate-900 font-mono">{user.bank_details.account_number ? user.bank_details.account_number.replace(/.(?=.{4})/g, '*') : "-"}</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-gray-400">IFSC</span>
-                <span className="text-white font-mono">{user.bank_details.ifsc_code || "-"}</span>
+              <div className="flex justify-between border-b border-slate-100 pb-2">
+                <span className="text-slate-500">IFSC</span>
+                <span className="text-slate-900 font-mono">{user.bank_details.ifsc_code || "-"}</span>
               </div>
               <div className="flex justify-between pt-2">
-                <span className="text-gray-400">UPI ID</span>
-                <span className="text-white font-mono">{user.bank_details.upi_id ? user.bank_details.upi_id.replace(/^.(.*)@/, (m: string, p1: string) => m[0] + '*'.repeat(p1.length) + '@') : "-"}</span>
+                <span className="text-slate-500">UPI ID</span>
+                <span className="text-slate-900 font-mono">{user.bank_details.upi_id ? user.bank_details.upi_id.replace(/^.(.*)@/, (m: string, p1: string) => m[0] + '*'.repeat(p1.length) + '@') : "-"}</span>
               </div>
             </div>
           ) : (
-            <p className="text-gray-500 text-sm italic">No bank details added by user.</p>
+            <p className="text-slate-400 text-sm italic">No bank details added by user.</p>
           )}
         </div>
 
         {/* Synced Location */}
-        <div className="glass-panel p-6 rounded-xl space-y-4">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-neon-emerald" /> Synced Location
+        <div className="bg-white p-6 rounded-xl space-y-4 border border-slate-200 shadow-sm">
+          <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+            <MapPin className="w-5 h-5 text-emerald-600" /> Synced Location
           </h3>
           {user.mobile_data?.location && Object.keys(user.mobile_data.location).length > 0 ? (
             <div className="space-y-3 text-sm">
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-gray-400">Latitude</span>
-                <span className="text-white font-mono">{user.mobile_data.location.lat ? '***' : '-'}</span>
+              <div className="flex justify-between border-b border-slate-100 pb-2">
+                <span className="text-slate-500">Latitude</span>
+                <span className="text-slate-900 font-mono">{user.mobile_data.location.lat ? '***' : '-'}</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-gray-400">Longitude</span>
-                <span className="text-white font-mono">{user.mobile_data.location.lng ? '***' : '-'}</span>
+              <div className="flex justify-between border-b border-slate-100 pb-2">
+                <span className="text-slate-500">Longitude</span>
+                <span className="text-slate-900 font-mono">{user.mobile_data.location.lng ? '***' : '-'}</span>
               </div>
-              <div className="flex justify-between border-b border-white/5 pb-2">
-                <span className="text-gray-400">Place (Address)</span>
-                <span className="text-white text-right max-w-[60%]">{address ? '***' : <span className="text-gray-500 animate-pulse">Calculating...</span>}</span>
+              <div className="flex justify-between border-b border-slate-100 pb-2">
+                <span className="text-slate-500">Place (Address)</span>
+                <span className="text-slate-900 text-right max-w-[60%]">{address ? '***' : <span className="text-slate-400 animate-pulse">Calculating...</span>}</span>
               </div>
               {user.mobile_data.location.timestamp && (
                 <div className="flex justify-between pt-2">
-                  <span className="text-gray-400">Last Synced</span>
-                  <span className="text-white">{formatIST(user.mobile_data.location.timestamp)}</span>
+                  <span className="text-slate-500">Last Synced</span>
+                  <span className="text-slate-900">{formatIST(user.mobile_data.location.timestamp)}</span>
                 </div>
               )}
             </div>
           ) : (
-            <p className="text-gray-500 text-sm italic">No location synced yet.</p>
+            <p className="text-slate-400 text-sm italic">No location synced yet.</p>
           )}
         </div>
 
         {/* Synced Contacts */}
-        <div className="glass-panel p-6 rounded-xl space-y-4 flex flex-col max-h-[400px]">
+        <div className="bg-white p-6 rounded-xl space-y-4 flex flex-col max-h-[400px] border border-slate-200 shadow-sm">
           <div className="flex items-center justify-between gap-4 mb-2">
-            <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-              <Contact className="w-5 h-5 text-yellow-500" /> Synced Contacts
+            <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+              <Contact className="w-5 h-5 text-yellow-600" /> Synced Contacts
             </h3>
             {user.mobile_data?.contacts && user.mobile_data.contacts.length > 0 && (
-              <span className="text-xs text-gray-400 bg-white/5 px-2 py-1 rounded-md border border-white/5 font-mono">
+              <span className="text-xs text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md font-mono">
                 {user.mobile_data.contacts.length} Total
               </span>
             )}
@@ -362,7 +362,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
           {user.mobile_data?.contacts && user.mobile_data.contacts.length > 0 ? (
             <>
               <div className="relative">
-                <Search className="w-4 h-4 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input 
                   type="text"
                   placeholder="Search contacts..."
@@ -371,7 +371,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                     setContactSearch(e.target.value);
                     setVisibleContacts(50); // Reset visible count on search
                   }}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg pl-9 pr-4 py-2 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-neon-blue transition-colors"
+                  className="w-full bg-white border border-slate-300 rounded-lg pl-9 pr-4 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 transition-colors"
                 />
               </div>
               <div className="overflow-y-auto custom-scrollbar pr-2 space-y-2 flex-1">
@@ -382,9 +382,9 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                   )
                   .slice(0, visibleContacts)
                   .map((c: any, idx: number) => (
-                    <div key={idx} className="flex justify-between items-center p-2.5 bg-white/5 rounded-lg border border-white/5 hover:bg-white/10 transition-colors">
-                      <span className="text-white text-sm font-medium truncate pr-4">{c.name || "Unknown"}</span>
-                      <span className="text-gray-400 text-xs font-mono shrink-0">{c.phone ? c.phone.replace(/.(?=.{4})/g, '*') : "-"}</span>
+                    <div key={idx} className="flex justify-between items-center p-2.5 bg-slate-50 rounded-lg border border-slate-100 hover:bg-slate-100 transition-colors">
+                      <span className="text-slate-900 text-sm font-medium truncate pr-4">{c.name || "Unknown"}</span>
+                      <span className="text-slate-500 text-xs font-mono shrink-0">{c.phone ? c.phone.replace(/.(?=.{4})/g, '*') : "-"}</span>
                     </div>
                 ))}
                 
@@ -394,7 +394,7 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                   ).length > visibleContacts && (
                   <button 
                     onClick={() => setVisibleContacts(prev => prev + 50)}
-                    className="w-full py-2 mt-2 text-sm text-neon-blue bg-neon-blue/10 hover:bg-neon-blue/20 rounded-lg font-semibold transition-colors border border-neon-blue/20"
+                    className="w-full py-2 mt-2 text-sm text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg font-semibold transition-colors border border-blue-200"
                   >
                     Load More Contacts
                   </button>
@@ -404,12 +404,12 @@ export default function UserDetailPage({ params }: { params: Promise<{ id: strin
                     (c.name && c.name.toLowerCase().includes(contactSearch.toLowerCase())) || 
                     (c.phone && c.phone.includes(contactSearch))
                   ).length === 0 && (
-                  <p className="text-gray-500 text-sm text-center py-4">No contacts match your search.</p>
+                  <p className="text-slate-500 text-sm text-center py-4">No contacts match your search.</p>
                 )}
               </div>
             </>
           ) : (
-            <p className="text-gray-500 text-sm italic">No contacts synced yet.</p>
+            <p className="text-slate-400 text-sm italic">No contacts synced yet.</p>
           )}
         </div>
       </div>
