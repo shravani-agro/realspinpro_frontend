@@ -107,6 +107,30 @@ export async function fetchAdminUserDetail(id: string) {
   return handleResponse(res, "Failed to fetch admin user detail");
 }
 
+export async function fetchAdminUserTransactions(id: string) {
+  const res = await apiFetch(`${API_BASE_URL}/admin/user/transactions?id=${id}`, { 
+    credentials: 'include', cache: 'no-store',
+    headers: getAdminHeaders()
+  });
+  return handleResponse(res, "Failed to fetch admin user transactions");
+}
+
+export async function fetchAdminUserBets(id: string) {
+  const res = await apiFetch(`${API_BASE_URL}/admin/user/bets?id=${id}`, { 
+    credentials: 'include', cache: 'no-store',
+    headers: getAdminHeaders()
+  });
+  return handleResponse(res, "Failed to fetch admin user bets");
+}
+
+export async function deleteAdminUser(id: number) {
+  const res = await apiFetch(`${API_BASE_URL}/admin/user/delete?id=${id}`, {
+    method: 'DELETE',
+    headers: getAdminHeaders(),
+  });
+  return handleResponse(res, "Failed to delete user");
+}
+
 export async function blockAdminUser(userId: number, isBlocked: boolean) {
   const res = await apiFetch(`${API_BASE_URL}/admin/user/block`, {
     method: 'POST',

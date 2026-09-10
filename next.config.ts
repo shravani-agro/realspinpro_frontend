@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     // Backend base URL. Defaults to the Go server's PORT (8080). Override with
     // BACKEND_URL in the environment (e.g. https://api.example.com) when deploying.
-    const backendUrl = process.env.BACKEND_URL || 'https://api.shravaniagro.store';
+    const backendUrl = process.env.BACKEND_URL || 'http://localhost:8080';
     return [
       {
         source: '/api-proxy/:path*',

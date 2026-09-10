@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Search, Filter, MoreHorizontal, ShieldCheck, ShieldAlert, Ban, Eye } from "lucide-react";
-import { fetchAdminUsers } from "@/lib/api";
+import { Search, Filter, MoreHorizontal, ShieldCheck, ShieldAlert, Ban, Eye, EyeOff, Trash2 } from "lucide-react";
+import { fetchAdminUsers, deleteAdminUser } from "@/lib/api";
 import Link from "next/link";
 import { toast } from "sonner";
 import { formatIST } from "@/utils/dateFormatter";
@@ -11,6 +11,22 @@ export default function UsersPage() {
   const [users, setUsers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+  const [visiblePins, setVisiblePins] = useState<Record<number, boolean>>({});
+
+  const togglePin = (id: number) => {
+    setVisiblePins(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!window.confirm("Are you sure you want to delete this user? This will permanently delete their account, bets, and wallet ledger.")) return;
+    try {
+      await deleteAdminUser(id);
+      setUsers(users.filter(u => u.id !== id));
+      toast.success("User deleted successfully");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to delete user");
+    }
+  };
 
   useEffect(() => {
     fetchAdminUsers()
@@ -57,7 +73,6 @@ export default function UsersPage() {
                   <th className="px-6 py-4">User ID</th>
                   <th className="px-6 py-4">Username / Mobile</th>
                   <th className="px-6 py-4">PIN</th>
-                  <th className="px-6 py-4">Email</th>
                   <th className="px-6 py-4">Wallet Balance</th>
                   <th className="px-6 py-4">Account Status</th>
                   <th className="px-6 py-4">Joined</th>
@@ -67,8 +82,7 @@ export default function UsersPage() {
               <tbody className="divide-y divide-slate-200">
                 {users.filter(u => 
                   (u.username && u.username.toLowerCase().includes(searchTerm.toLowerCase())) || 
-                  (u.mobile && u.mobile.includes(searchTerm)) || 
-                  (u.email && u.email.toLowerCase().includes(searchTerm.toLowerCase()))
+                  (u.mobile && u.mobile.includes(searchTerm))
                 ).map((user) => (
                   <tr key={user.id} className="hover:bg-slate-50 transition-colors group">
                     <td className="px-6 py-4 font-mono text-slate-500">#{user.id}</td>
@@ -76,8 +90,16 @@ export default function UsersPage() {
                       <div className="font-medium text-slate-900">{user.username || "Anonymous"}</div>
                       <div className="text-xs text-slate-500">{user.mobile}</div>
                     </td>
-                    <td className="px-6 py-4 font-mono font-bold text-slate-400 tracking-widest">***</td>
-                    <td className="px-6 py-4 text-slate-500">{user.email || "-"}</td>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono font-bold text-slate-700 tracking-widest">
+                          {visiblePins[user.id] ? user.pin : "***"}
+                        </span>
+                        <button onClick={() => togglePin(user.id)} className="text-slate-400 hover:text-slate-600">
+                          {visiblePins[user.id] ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </td>
                     <td className="px-6 py-4 font-mono text-blue-600 font-medium">₹{user.balance_cached}</td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${!user.is_blocked ? 'text-emerald-700 bg-emerald-50' : 'text-red-700 bg-red-50'}`}>
@@ -92,15 +114,20 @@ export default function UsersPage() {
                       {formatIST(user.created_at)}
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <Link href={`/admin/users/${user.id}`} className="p-2 inline-block text-slate-400 hover:text-blue-600 transition-colors">
-                        <Eye className="w-5 h-5" />
-                      </Link>
+                      <div className="flex items-center justify-end gap-2">
+                        <Link href={`/admin/users/${user.id}`} className="p-2 inline-block text-slate-400 hover:text-blue-600 transition-colors" title="View Details">
+                          <Eye className="w-5 h-5" />
+                        </Link>
+                        <button onClick={() => handleDelete(user.id)} className="p-2 inline-block text-slate-400 hover:text-red-600 transition-colors" title="Delete User">
+                          <Trash2 className="w-5 h-5" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
                 {users.length === 0 && (
                   <tr>
-                    <td colSpan={8} className="text-center py-8 text-slate-500">No users found</td>
+                    <td colSpan={7} className="text-center py-8 text-slate-500">No users found</td>
                   </tr>
                 )}
               </tbody>
