@@ -6,6 +6,9 @@ import { Navbar } from "./Navbar";
 import { usePathname, useRouter } from "next/navigation";
 import { fetchAdminSettings } from "@/lib/api";
 
+const GRID_BG =
+  "bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:24px_24px]";
+
 export function AdminLayoutWrapper({ children }: { children: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -21,7 +24,7 @@ export function AdminLayoutWrapper({ children }: { children: React.ReactNode }) 
       setIsVerifying(false);
       return;
     }
-    
+
     // Verify session with the backend using HttpOnly cookie
     fetchAdminSettings()
       .then(() => {
@@ -29,8 +32,6 @@ export function AdminLayoutWrapper({ children }: { children: React.ReactNode }) 
         setIsVerifying(false);
       })
       .catch(() => {
-        // fetchAdminSettings triggers handleResponse which redirects on 401, 
-        // but just in case, we do it here too
         router.replace("/admin/login");
       });
   }, [isLoginPage, router]);
@@ -38,8 +39,11 @@ export function AdminLayoutWrapper({ children }: { children: React.ReactNode }) 
   // If on login page, just render children without sidebar/navbar
   if (isLoginPage) {
     return (
-      <div className="min-h-screen bg-slate-50 text-slate-900 flex font-sans [&_h1]:font-sans [&_h2]:font-sans [&_h3]:font-sans [&_h4]:font-sans [&_h5]:font-sans [&_h6]:font-sans">
-        <div className="fixed inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+      <div
+        className="relative min-h-screen w-full bg-white font-sans text-slate-900 [&_h1]:font-sans [&_h2]:font-sans [&_h3]:font-sans [&_h4]:font-sans [&_h5]:font-sans [&_h6]:font-sans"
+        style={{ minHeight: "100dvh" }}
+      >
+        <div className={`fixed inset-0 pointer-events-none ${GRID_BG}`} />
         {children}
       </div>
     );
@@ -47,33 +51,46 @@ export function AdminLayoutWrapper({ children }: { children: React.ReactNode }) 
 
   if (!isAuthenticated && isVerifying) {
     return (
-      <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center font-sans">
-        <div className="w-8 h-8 rounded-full border-t-2 border-r-2 border-blue-600 animate-spin" />
+      <div
+        className="flex min-h-screen items-center justify-center bg-slate-50 font-sans text-slate-900"
+        style={{ minHeight: "100dvh" }}
+      >
+        <div className="relative">
+          <div className="absolute inset-0 rounded-full bg-blue-500/30 blur-xl" />
+          <div className="relative h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex font-sans [&_h1]:font-sans [&_h2]:font-sans [&_h3]:font-sans [&_h4]:font-sans [&_h5]:font-sans [&_h6]:font-sans">
+    <div
+      className="flex min-h-screen bg-slate-50 font-sans text-slate-900 [&_h1]:font-sans [&_h2]:font-sans [&_h3]:font-sans [&_h4]:font-sans [&_h5]:font-sans [&_h6]:font-sans"
+      style={{ minHeight: "100dvh" }}
+    >
       {/* Background Grid */}
-      <div className="fixed inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+      <div className={`fixed inset-0 pointer-events-none ${GRID_BG}`} />
 
       {/* Mobile Overlay */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
       {/* Sidebar with mobile toggle classes */}
-      <div className={`fixed inset-y-0 left-0 z-50 md:sticky md:top-0 transition-transform duration-300 transform ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}`}>
+      <div
+        className={`fixed inset-y-0 left-0 z-50 transition-transform duration-300 md:sticky md:top-0 md:translate-x-0 ${
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
         <Sidebar onCloseMobile={() => setIsMobileMenuOpen(false)} />
       </div>
 
-      <div className="flex-1 flex flex-col min-w-0 relative z-10 w-full overflow-hidden">
+      <div className="relative z-10 flex min-w-0 flex-1 flex-col overflow-x-hidden">
         <Navbar onMenuClick={() => setIsMobileMenuOpen(true)} />
-        <main className="flex-1 p-4 md:p-6 overflow-x-hidden w-full">
+        <main className="mx-auto w-full max-w-[1600px] flex-1 p-4 md:p-6">
           {children}
         </main>
       </div>

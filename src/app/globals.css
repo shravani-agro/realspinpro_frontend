@@ -209,6 +209,14 @@
   }
 }
 
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Premium Gaming Styling */
 .luxury-glass {
   @apply bg-[#150d32]/65 backdrop-blur-xl border border-gaming-gold/30 shadow-[0_8px_32px_rgba(121,0,214,0.25)];

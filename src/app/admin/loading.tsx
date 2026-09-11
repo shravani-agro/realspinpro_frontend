@@ -1,7 +1,10 @@
 export default function Loading() {
   return (
-    <div className="flex items-center justify-center min-h-[50vh]">
-      <div className="w-8 h-8 border-4 border-neon-blue border-t-transparent rounded-full animate-spin" />
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <div className="relative">
+        <div className="absolute inset-0 rounded-full bg-blue-500/30 blur-xl" />
+        <div className="relative h-10 w-10 animate-spin rounded-full border-4 border-blue-600 border-t-transparent" />
+      </div>
     </div>
   );
 }
