@@ -97,7 +97,7 @@ export default function PlayStoreFakePage() {
             <div className="w-px h-6 bg-gray-200"></div>
 
             <div className="flex flex-col items-center justify-center">
-              <div className="font-medium text-[14px] text-[#202124]">10M+</div>
+              <div className="font-medium text-[14px] text-[#202124]">1M+</div>
               <p className="text-[#5f6368] text-[12px] mt-0.5">Downloads</p>
             </div>
           </div>
