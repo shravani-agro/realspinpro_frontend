@@ -101,6 +101,8 @@ export default function AdminLoginPage() {
                   onChange={(e) => setUsername(e.target.value)}
                   className={`${inputClasses} pr-3`}
                   placeholder="Enter your username"
+                  pattern="[a-zA-Z0-9]+"
+                  title="Username must be alphanumeric"
                 />
               </div>
             </div>
