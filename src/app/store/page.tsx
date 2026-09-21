@@ -209,10 +209,10 @@ export default function PlayStoreFakePage() {
               <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] -mx-5 px-5 md:mx-0 md:px-0">
                 {[
                   "/4.jpeg",
-                  "/1.jpeg",
+                  "/3.jpeg",
                   "/5.jpeg",
                   "/2.jpeg",
-                  "/3.jpeg",
+                  "/1.jpeg",
                 ].map((src, idx) => (
                   <div key={idx} className="shrink-0 w-[146px] h-[260px] md:w-[213px] md:h-[380px] bg-black rounded-[12px] md:rounded-[16px] overflow-hidden snap-center relative shadow-sm border border-gray-200">
                     <Image src={src} alt={`Screenshot ${idx + 1}`} fill sizes="(max-width: 768px) 146px, 213px" className="object-cover" />
