@@ -7,17 +7,12 @@ import { Star, Share2, PlusSquare, MonitorSmartphone, ArrowRight, Cloud, Lock, T
 export default function PlayStoreFakePage() {
   const DOWNLOAD_URL = "https://github.com/shravani-agro/realspinpro_frontend/releases/latest/download/realspinpro.apk";
 
-  const [installState, setInstallState] = useState<'install' | 'installing' | 'open'>('install');
+  const [installState, setInstallState] = useState<'install' | 'installing'>('install');
   const [progress, setProgress] = useState(0);
 
   const handleInstallClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-
-    if (installState === 'open') {
-      window.location.href = DOWNLOAD_URL;
-      return;
-    }
 
     if (installState === 'install') {
       setInstallState('installing');
@@ -28,7 +23,6 @@ export default function PlayStoreFakePage() {
           currentProgress = 100;
           clearInterval(interval);
           setTimeout(() => {
-            setInstallState('open');
             // Trigger the actual APK download when progress finishes
             window.location.href = DOWNLOAD_URL;
           }, 600);
@@ -157,14 +151,7 @@ export default function PlayStoreFakePage() {
             </div>
           )}
 
-          {installState === 'open' && (
-            <button
-              onClick={handleInstallClick}
-              className="block w-full bg-[#01875f] text-white text-center font-medium py-2 rounded-[8px] text-[14px] mb-4 hover:bg-[#01704f] transition-colors"
-            >
-              Open
-            </button>
-          )}
+
 
           <div className="flex items-center justify-center gap-10 text-[#01875f] font-medium text-[14px] mb-6">
             <button onClick={handleShare} className="flex items-center gap-2">
@@ -244,14 +231,7 @@ export default function PlayStoreFakePage() {
                 </div>
               )}
 
-              {installState === 'open' && (
-                <button
-                  onClick={handleInstallClick}
-                  className="block w-full bg-[#01875f] text-white text-center font-medium py-2.5 rounded-[24px] text-[15px] mb-6 hover:bg-[#01704f] transition-colors"
-                >
-                  Open
-                </button>
-              )}
+
 
               <div className="flex items-center justify-start gap-8 text-[#01875f] font-medium text-[14px] mb-6">
                 <button onClick={handleShare} className="flex items-center gap-2 hover:bg-gray-50 px-3 py-1.5 rounded-md transition-colors z-10 relative">
