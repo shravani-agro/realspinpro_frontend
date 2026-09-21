@@ -11,8 +11,8 @@ export function StickyBottomBanner() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling 300px
-      if (window.scrollY > 300) {
+      // Show after scrolling 50px (much faster)
+      if (window.scrollY > 50) {
         setIsVisible(true);
       } else {
         setIsVisible(false);

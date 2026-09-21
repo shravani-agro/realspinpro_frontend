@@ -415,7 +415,7 @@ export default function PlayStoreFakePage() {
 
               {/* Similar Game Item */}
               <div className="flex gap-4 items-center cursor-pointer hover:bg-gray-50 p-2 -ml-2 rounded-lg transition-colors">
-                <div className="w-14 h-14 bg-black rounded-[12px] overflow-hidden shrink-0 shadow-sm border border-gray-100">
+                <div className="w-14 h-14 overflow-hidden shrink-0 shadow-sm border border-gray-100">
                   <Image src="/playicon.png" alt="Similar game" width={56} height={56} className="w-full h-full object-contain p-1" />
                 </div>
                 <div>
