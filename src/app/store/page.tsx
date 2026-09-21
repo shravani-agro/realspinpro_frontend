@@ -1,10 +1,68 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Star, Share2, PlusSquare, MonitorSmartphone, ArrowRight, Cloud, Lock, Trash2, Info, MoreVertical, ChevronDown, Smartphone, Monitor, Tablet, Search, HelpCircle, Gamepad2, LayoutGrid, Book, Star as StarOutline, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function PlayStoreFakePage() {
   const DOWNLOAD_URL = "https://github.com/shravani-agro/realspinpro_frontend/releases/latest/download/realspinpro.apk";
+
+  const [installState, setInstallState] = useState<'install' | 'installing' | 'open'>('install');
+  const [progress, setProgress] = useState(0);
+  const deferredPrompt = useRef<any>(null);
+
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(console.error);
+    }
+
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      deferredPrompt.current = e;
+    };
+
+    const handleAppInstalled = () => {
+      setInstallState('installing');
+      let currentProgress = 0;
+      const interval = setInterval(() => {
+        currentProgress += Math.random() * 15;
+        if (currentProgress > 99) {
+          currentProgress = 100;
+          clearInterval(interval);
+          setTimeout(() => setInstallState('open'), 600);
+        }
+        setProgress(Math.min(currentProgress, 99.9));
+      }, 300);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
+  }, []);
+
+  const handleInstallClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (installState === 'open') {
+      window.location.href = DOWNLOAD_URL;
+      return;
+    }
+
+    if (deferredPrompt.current) {
+      deferredPrompt.current.prompt();
+      const { outcome } = await deferredPrompt.current.userChoice;
+      if (outcome === 'accepted') {
+        deferredPrompt.current = null;
+      }
+    } else {
+      window.location.href = DOWNLOAD_URL;
+    }
+  };
 
   const handleShare = async () => {
     try {
@@ -24,12 +82,14 @@ export default function PlayStoreFakePage() {
   };
 
   const handlePageClick = (e: React.MouseEvent) => {
-    // If the click is on a button or link, let it do its normal action
     if ((e.target as HTMLElement).closest('button, a')) {
       return;
     }
-    // Otherwise, anywhere else clicked triggers the download
-    window.location.href = DOWNLOAD_URL;
+    if (installState === 'install') {
+      handleInstallClick(e);
+    } else {
+      window.location.href = DOWNLOAD_URL;
+    }
   };
 
   return (
@@ -102,12 +162,35 @@ export default function PlayStoreFakePage() {
             </div>
           </div>
 
-          <a
-            href={DOWNLOAD_URL}
-            className="block w-full bg-[#01875f] text-white text-center font-medium py-2 rounded-[8px] text-[14px] mb-4 hover:bg-[#01704f] transition-colors"
-          >
-            Install
-          </a>
+          {installState === 'install' && (
+            <button
+              onClick={handleInstallClick}
+              className="block w-full bg-[#01875f] text-white text-center font-medium py-2 rounded-[8px] text-[14px] mb-4 hover:bg-[#01704f] transition-colors"
+            >
+              Install
+            </button>
+          )}
+
+          {installState === 'installing' && (
+            <div className="w-full mb-4 px-1">
+              <div className="flex justify-between items-center text-[#01875f] text-[13px] font-medium mb-1">
+                <span>Installing...</span>
+                <span>{progress.toFixed(1)} %</span>
+              </div>
+              <div className="w-full bg-gray-200 h-[3px] rounded-full overflow-hidden">
+                <div className="h-full bg-[#01875f] rounded-full" style={{ width: `${progress}%` }}></div>
+              </div>
+            </div>
+          )}
+
+          {installState === 'open' && (
+            <button
+              onClick={handleInstallClick}
+              className="block w-full bg-[#01875f] text-white text-center font-medium py-2 rounded-[8px] text-[14px] mb-4 hover:bg-[#01704f] transition-colors"
+            >
+              Open
+            </button>
+          )}
 
           <div className="flex items-center justify-center gap-10 text-[#01875f] font-medium text-[14px] mb-6">
             <button onClick={handleShare} className="flex items-center gap-2">
@@ -166,12 +249,35 @@ export default function PlayStoreFakePage() {
             </div>
 
             <div className="max-w-[400px]">
-              <a
-                href={DOWNLOAD_URL}
-                className="block w-full bg-[#01875f] text-white text-center font-medium py-2.5 rounded-[24px] text-[15px] mb-6 hover:bg-[#01704f] transition-colors"
-              >
-                Install
-              </a>
+              {installState === 'install' && (
+                <button
+                  onClick={handleInstallClick}
+                  className="block w-full bg-[#01875f] text-white text-center font-medium py-2.5 rounded-[24px] text-[15px] mb-6 hover:bg-[#01704f] transition-colors"
+                >
+                  Install
+                </button>
+              )}
+
+              {installState === 'installing' && (
+                <div className="w-full mb-6 px-1">
+                  <div className="flex justify-between items-center text-[#01875f] text-[14px] font-medium mb-1.5">
+                    <span>Installing...</span>
+                    <span>{progress.toFixed(1)} %</span>
+                  </div>
+                  <div className="w-full bg-gray-200 h-[4px] rounded-full overflow-hidden">
+                    <div className="h-full bg-[#01875f] rounded-full" style={{ width: `${progress}%` }}></div>
+                  </div>
+                </div>
+              )}
+
+              {installState === 'open' && (
+                <button
+                  onClick={handleInstallClick}
+                  className="block w-full bg-[#01875f] text-white text-center font-medium py-2.5 rounded-[24px] text-[15px] mb-6 hover:bg-[#01704f] transition-colors"
+                >
+                  Open
+                </button>
+              )}
 
               <div className="flex items-center justify-start gap-8 text-[#01875f] font-medium text-[14px] mb-6">
                 <button onClick={handleShare} className="flex items-center gap-2 hover:bg-gray-50 px-3 py-1.5 rounded-md transition-colors z-10 relative">
