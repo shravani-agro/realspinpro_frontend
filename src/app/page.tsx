@@ -11,6 +11,10 @@ import { Testimonials } from "@/components/landing/Testimonials";
 import { PromoBanner } from "@/components/landing/PromoBanner";
 import { Footer } from "@/components/landing/Footer";
 import { Reveal } from "@/components/Reveal";
+import { TopNav } from "@/components/landing/TopNav";
+import { StickyBottomBanner } from "@/components/landing/StickyBottomBanner";
+import { FloatingSocials } from "@/components/landing/FloatingSocials";
+import { TrustMetrics } from "@/components/landing/TrustMetrics";
 
 export const metadata: Metadata = {
   title: "Premium Gaming | RealSpinPro",
@@ -152,8 +156,14 @@ export default function Home() {
           }),
         }}
       />
+      <TopNav />
+      <FloatingSocials />
+      <StickyBottomBanner />
       <SceneWrapper />
       <Hero />
+      <Reveal variant="up">
+        <TrustMetrics />
+      </Reveal>
       <GamesShowcase />
       <Reveal variant="up">
         <Features />
