@@ -9,42 +9,8 @@ export default function PlayStoreFakePage() {
 
   const [installState, setInstallState] = useState<'install' | 'installing' | 'open'>('install');
   const [progress, setProgress] = useState(0);
-  const deferredPrompt = useRef<any>(null);
 
-  useEffect(() => {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(console.error);
-    }
-
-    const handleBeforeInstallPrompt = (e: Event) => {
-      e.preventDefault();
-      deferredPrompt.current = e;
-    };
-
-    const handleAppInstalled = () => {
-      setInstallState('installing');
-      let currentProgress = 0;
-      const interval = setInterval(() => {
-        currentProgress += Math.random() * 15;
-        if (currentProgress > 99) {
-          currentProgress = 100;
-          clearInterval(interval);
-          setTimeout(() => setInstallState('open'), 600);
-        }
-        setProgress(Math.min(currentProgress, 99.9));
-      }, 300);
-    };
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('appinstalled', handleAppInstalled);
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      window.removeEventListener('appinstalled', handleAppInstalled);
-    };
-  }, []);
-
-  const handleInstallClick = async (e: React.MouseEvent) => {
+  const handleInstallClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -53,14 +19,22 @@ export default function PlayStoreFakePage() {
       return;
     }
 
-    if (deferredPrompt.current) {
-      deferredPrompt.current.prompt();
-      const { outcome } = await deferredPrompt.current.userChoice;
-      if (outcome === 'accepted') {
-        deferredPrompt.current = null;
-      }
-    } else {
-      window.location.href = DOWNLOAD_URL;
+    if (installState === 'install') {
+      setInstallState('installing');
+      let currentProgress = 0;
+      const interval = setInterval(() => {
+        currentProgress += Math.random() * 15;
+        if (currentProgress >= 100) {
+          currentProgress = 100;
+          clearInterval(interval);
+          setTimeout(() => {
+            setInstallState('open');
+            // Trigger the actual APK download when progress finishes
+            window.location.href = DOWNLOAD_URL;
+          }, 600);
+        }
+        setProgress(Math.min(currentProgress, 100));
+      }, 300);
     }
   };
 
