@@ -3,7 +3,6 @@ import { Orbitron, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LenisProvider } from "@/components/lenis-provider";
-import { Cursor } from "@/components/Cursor";
 import { FetchTimeoutGuard } from "@/components/FetchTimeoutGuard";
 
 const orbitron = Orbitron({
@@ -156,7 +155,6 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} forcedTheme="dark">
           <LenisProvider>
             <FetchTimeoutGuard />
-            <Cursor />
             {children}
           </LenisProvider>
         </ThemeProvider>
