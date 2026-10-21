@@ -70,7 +70,14 @@ export default function WalletScreen() {
       const env = result.environment;
       const ledgerId = result.ledger_id;
 
-      if (paymentSessionId && orderId) {
+      if (result.gateway === "youpi" || result.upi_uri) {
+        const checkoutUrl = result.checkout_url 
+          ? (result.checkout_url.startsWith('http') ? result.checkout_url : `${GAME_API}${result.checkout_url}`)
+          : `${GAME_API}/checkout?gateway=youpi&order_id=${orderId}&amount=${amount}&payee_vpa=${encodeURIComponent(result.payee_vpa || "")}&payee_name=${encodeURIComponent(result.payee_name || "")}&upi_uri=${encodeURIComponent(result.upi_uri || "")}`;
+        window.open(checkoutUrl, "_blank");
+        toast.info("Opened YouPI UPI payment. Verifying transfer...");
+        startPolling(ledgerId);
+      } else if (paymentSessionId && orderId) {
         const checkoutUrl = `${GAME_API}/checkout?payment_session_id=${paymentSessionId}&env=${env ?? "PRODUCTION"}`;
         window.open(checkoutUrl, "_blank");
         toast.info("Verifying payment...");
