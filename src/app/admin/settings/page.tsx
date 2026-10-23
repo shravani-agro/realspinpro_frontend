@@ -13,7 +13,7 @@ export default function SettingsPage() {
     min_withdrawal: "1000",
     active_payment_gateway: "cashfree",
     youpi_config: {
-      payee_vpa: "harryshastri21@okaxis",
+      payee_vpa: "",
       payee_name: "RealSpinPro"
     },
     cashfree_config: {
@@ -259,12 +259,18 @@ export default function SettingsPage() {
                     type="text" 
                     value={settings.youpi_config?.payee_vpa || ""}
                     onChange={(e) => handleYoupiChange("payee_vpa", e.target.value)}
-                    placeholder="e.g. harryshastri21@okaxis"
+                    placeholder="Enter receiver UPI ID (e.g. yourname@okhdfcbank or yourbiz@upi)"
                     className="w-full bg-white border border-emerald-300 rounded-lg px-3 py-2 text-sm text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-500/20" 
                   />
-                  <p className="text-[11px] text-emerald-700 mt-1 font-medium">
-                    &bull; All user deposits will be transferred directly to this UPI ID.
-                  </p>
+                  {!settings.youpi_config?.payee_vpa ? (
+                    <p className="text-[11px] text-amber-600 mt-1 font-semibold flex items-center gap-1">
+                      ⚠️ UPI ID is not set. Enter your UPI ID and click "Save Settings" below.
+                    </p>
+                  ) : (
+                    <p className="text-[11px] text-emerald-700 mt-1 font-medium">
+                      &bull; All user deposits will be transferred directly to this UPI ID.
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Payee Business / Display Name</label>
