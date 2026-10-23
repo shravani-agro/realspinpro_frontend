@@ -13,11 +13,8 @@ export default function SettingsPage() {
     min_withdrawal: "1000",
     active_payment_gateway: "cashfree",
     youpi_config: {
-      gateway_url: "https://api.shravaniagro.store",
-      payee_vpa: "realspinpro@upi",
-      payee_name: "RealSpinPro",
-      merchant_id: "MERCHANT_REALSPINPRO",
-      direct_upi_mode: true
+      payee_vpa: "harryshastri21@okaxis",
+      payee_name: "RealSpinPro"
     },
     cashfree_config: {
       environment: "SANDBOX"
@@ -241,36 +238,36 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          {/* YouPI Configuration Fields (Shown ONLY when YouPI is selected) */}
+          {/* Direct UPI Configuration Fields (Shown ONLY when YouPI is selected) */}
           {settings.active_payment_gateway === "youpi" && (
             <div className="p-5 bg-emerald-50/50 border border-emerald-200 rounded-xl space-y-4">
               <div className="flex items-center justify-between border-b border-emerald-200 pb-3">
                 <h4 className="font-bold text-slate-800 text-sm flex items-center gap-2">
                   <QrCode className="w-4 h-4 text-emerald-600" />
-                  YouPI Gateway Parameters (Configured Only When YouPI is Active)
+                  Direct UPI Receiver Settings
                 </h4>
                 <span className="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300">
-                  PRODUCTION READY
+                  0% FEE &bull; DIRECT UPI
                 </span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                    Payee UPI VPA / ID (Admin Controlled)
+                    Payee UPI VPA / ID (Receiver)
                   </label>
                   <input 
                     type="text" 
                     value={settings.youpi_config?.payee_vpa || ""}
                     onChange={(e) => handleYoupiChange("payee_vpa", e.target.value)}
-                    placeholder="e.g. yourname@okaxis or merchant@upi"
+                    placeholder="e.g. harryshastri21@okaxis"
                     className="w-full bg-white border border-emerald-300 rounded-lg px-3 py-2 text-sm text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-500/20" 
                   />
                   <p className="text-[11px] text-emerald-700 mt-1 font-medium">
-                    &bull; Set by Admin Panel. All deposits will be paid directly to this UPI VPA.
+                    &bull; All user deposits will be transferred directly to this UPI ID.
                   </p>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Payee Business Name</label>
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Payee Business / Display Name</label>
                   <input 
                     type="text" 
                     value={settings.youpi_config?.payee_name || ""}
@@ -278,29 +275,7 @@ export default function SettingsPage() {
                     placeholder="RealSpinPro"
                     className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-emerald-500" 
                   />
-                  <p className="text-[11px] text-slate-500 mt-1">Merchant business name displayed inside GPay, PhonePe, Paytm.</p>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Production YouPI Gateway URL</label>
-                  <input 
-                    type="text" 
-                    value={settings.youpi_config?.gateway_url || ""}
-                    onChange={(e) => handleYoupiChange("gateway_url", e.target.value)}
-                    placeholder="https://api.shravaniagro.store"
-                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-emerald-500" 
-                  />
-                  <p className="text-[11px] text-slate-500 mt-1">Production Gateway endpoint (e.g. https://api.shravaniagro.store).</p>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Merchant UUID / Token</label>
-                  <input 
-                    type="text" 
-                    value={settings.youpi_config?.merchant_id || ""}
-                    onChange={(e) => handleYoupiChange("merchant_id", e.target.value)}
-                    placeholder="MERCHANT_REALSPINPRO"
-                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-emerald-500" 
-                  />
-                  <p className="text-[11px] text-slate-500 mt-1">YouPI merchant authentication identifier.</p>
+                  <p className="text-[11px] text-slate-500 mt-1">Receiver name displayed inside Google Pay, PhonePe, and Paytm.</p>
                 </div>
               </div>
             </div>
