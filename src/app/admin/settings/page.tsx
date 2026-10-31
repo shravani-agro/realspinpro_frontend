@@ -12,9 +12,12 @@ export default function SettingsPage() {
     withdrawal_fee_percent: "2.5",
     min_withdrawal: "1000",
     active_payment_gateway: "cashfree",
-    youpi_config: {
-      payee_vpa: "",
-      payee_name: "RealSpinPro"
+    pay100_config: {
+      client_id: "cid_776e73eb3091083db4f279b9",
+      encrypted_key: "ek_2-7Tli-8ly28pO33j3W2NdDIIpAsK2ruPXXz5V1b7ZsaOoSbdIcGHw",
+      secret_key: "sk_StLpX_VlYRfCgsfq_X9Ohwg4FncatdIHNur_LNLo2iY",
+      base_url: "https://pay100.in",
+
     },
     cashfree_config: {
       environment: "SANDBOX"
@@ -40,8 +43,8 @@ export default function SettingsPage() {
         if (typeof data.promotions === 'string') {
           parsedSettings.promotions = JSON.parse(data.promotions);
         }
-        if (typeof data.youpi_config === 'string') {
-          parsedSettings.youpi_config = JSON.parse(data.youpi_config);
+        if (typeof data.pay100_config === 'string') {
+          parsedSettings.pay100_config = JSON.parse(data.pay100_config);
         }
         if (typeof data.cashfree_config === 'string') {
           parsedSettings.cashfree_config = JSON.parse(data.cashfree_config);
@@ -63,11 +66,11 @@ export default function SettingsPage() {
     setSettings((prev: any) => ({ ...prev, [key]: value }));
   };
 
-  const handleYoupiChange = (key: string, value: any) => {
+  const handlePay100Change = (key: string, value: any) => {
     setSettings((prev: any) => ({
       ...prev,
-      youpi_config: {
-        ...(prev.youpi_config || {}),
+      pay100_config: {
+        ...(prev.pay100_config || {}),
         [key]: value
       }
     }));
@@ -172,12 +175,12 @@ export default function SettingsPage() {
               <CreditCard className="w-5 h-5 text-indigo-600" />
               Payment Gateway Management
             </h2>
-            <p className="text-sm text-slate-500 mt-1">Switch dynamically between Cashfree and YouPI-PG Gateway anytime.</p>
+            <p className="text-sm text-slate-500 mt-1">Switch dynamically between Cashfree and Pay100 Gateway anytime.</p>
           </div>
           <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
-            settings.active_payment_gateway === 'youpi' ? 'bg-emerald-100 text-emerald-700 border border-emerald-300' : 'bg-blue-100 text-blue-700 border border-blue-300'
+            settings.active_payment_gateway === 'pay100' ? 'bg-emerald-100 text-emerald-700 border border-emerald-300' : 'bg-blue-100 text-blue-700 border border-blue-300'
           }`}>
-            Active: {settings.active_payment_gateway === 'youpi' ? 'YouPI (Direct UPI)' : 'Cashfree'}
+            Active: {settings.active_payment_gateway === 'pay100' ? 'Pay100 (UPI Intent & IMPS)' : 'Cashfree'}
           </span>
         </div>
         <div className="p-6 space-y-6">
@@ -208,11 +211,11 @@ export default function SettingsPage() {
               <p className="text-xs text-slate-600">Supports Cards, Netbanking, Wallets & Cashfree Hosted Checkout.</p>
             </div>
 
-            {/* YouPI Gateway Selector Card */}
+            {/* Pay100 Gateway Selector Card */}
             <div 
-              onClick={() => handleChange("active_payment_gateway", "youpi")}
+              onClick={() => handleChange("active_payment_gateway", "pay100")}
               className={`p-5 rounded-2xl border-2 cursor-pointer transition-all ${
-                settings.active_payment_gateway === "youpi" 
+                settings.active_payment_gateway === "pay100" 
                   ? "border-emerald-600 bg-emerald-50/50 shadow-md ring-2 ring-emerald-500/20" 
                   : "border-slate-200 bg-white hover:border-slate-300"
               }`}
@@ -224,13 +227,13 @@ export default function SettingsPage() {
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="font-bold text-slate-900">YouPI-PG Gateway</h3>
+                      <h3 className="font-bold text-slate-900">Pay100 Gateway</h3>
                       <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-emerald-200 text-emerald-800">0% FEES</span>
                     </div>
-                    <p className="text-xs text-slate-500">Self-Hosted Direct UPI & Bank SMS Observation</p>
+                    <p className="text-xs text-slate-500">Production UPI Payment Intent & IMPS Payout API</p>
                   </div>
                 </div>
-                {settings.active_payment_gateway === "youpi" && (
+                {settings.active_payment_gateway === "pay100" && (
                   <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                 )}
               </div>
@@ -238,31 +241,31 @@ export default function SettingsPage() {
             </div>
           </div>
 
-          {/* Direct UPI Configuration Fields (Shown ONLY when YouPI is selected) */}
-          {settings.active_payment_gateway === "youpi" && (
+          {/* Pay100 Gateway Configuration Fields */}
+          {settings.active_payment_gateway === "pay100" && (
             <div className="p-5 bg-emerald-50/50 border border-emerald-200 rounded-xl space-y-4">
               <div className="flex items-center justify-between border-b border-emerald-200 pb-3">
                 <h4 className="font-bold text-slate-800 text-sm flex items-center gap-2">
                   <QrCode className="w-4 h-4 text-emerald-600" />
-                  Direct UPI Receiver Settings
+                  Pay100 API Credentials
                 </h4>
                 <span className="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-300">
-                  0% FEE &bull; DIRECT UPI
+                  UPI INTENT + IMPS PAYOUT
                 </span>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase mb-1">
-                    Payee UPI VPA / ID (Receiver)
+                    Pay100 Client ID (X-Client-ID)
                   </label>
                   <input 
                     type="text" 
-                    value={settings.youpi_config?.payee_vpa || ""}
-                    onChange={(e) => handleYoupiChange("payee_vpa", e.target.value)}
-                    placeholder="Enter receiver UPI ID (e.g. yourname@okhdfcbank or yourbiz@upi)"
+                    value={settings.pay100_config?.client_id || ""}
+                    onChange={(e) => handlePay100Change("client_id", e.target.value)}
+                    placeholder="cid_776e73eb3091083db4f279b9"
                     className="w-full bg-white border border-emerald-300 rounded-lg px-3 py-2 text-sm text-slate-900 font-semibold focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-500/20" 
                   />
-                  {!settings.youpi_config?.payee_vpa ? (
+                  {!settings.pay100_config?.client_id ? (
                     <p className="text-[11px] text-amber-600 mt-1 font-semibold flex items-center gap-1">
                       ⚠️ UPI ID is not set. Enter your UPI ID and click "Save Settings" below.
                     </p>
@@ -273,15 +276,35 @@ export default function SettingsPage() {
                   )}
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Payee Business / Display Name</label>
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Pay100 Base URL</label>
                   <input 
                     type="text" 
-                    value={settings.youpi_config?.payee_name || ""}
-                    onChange={(e) => handleYoupiChange("payee_name", e.target.value)}
+                    value={settings.pay100_config?.base_url || "https://pay100.in"}
+                    onChange={(e) => handlePay100Change("base_url", e.target.value)}
                     placeholder="RealSpinPro"
                     className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-emerald-500" 
                   />
-                  <p className="text-[11px] text-slate-500 mt-1">Receiver name displayed inside Google Pay, PhonePe, and Paytm.</p>
+                  <p className="text-[11px] text-slate-500 mt-1">Default: https://pay100.in</p>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Encrypted Key (X-Encrypted-Key)</label>
+                  <input 
+                    type="text" 
+                    value={settings.pay100_config?.encrypted_key || ""}
+                    onChange={(e) => handlePay100Change("encrypted_key", e.target.value)}
+                    placeholder="ek_..."
+                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 font-mono focus:outline-none focus:border-emerald-500" 
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Secret Key (X-Secret-Key)</label>
+                  <input 
+                    type="password" 
+                    value={settings.pay100_config?.secret_key || ""}
+                    onChange={(e) => handlePay100Change("secret_key", e.target.value)}
+                    placeholder="sk_..."
+                    className="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 font-mono focus:outline-none focus:border-emerald-500" 
+                  />
                 </div>
               </div>
             </div>
